@@ -1,0 +1,34 @@
+@model ActifWebCRUD.Models.Pais
+
+@{
+    ViewData["Title"] = "Eliminar Pais";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Pais</h1>
+
+    <h3>Esta seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdPais)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdPais)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="pais_delete_form">
+            <input type="hidden" asp-for="IdPais" />
+            <button type="submit" class="btn btn-danger" id="pais_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="pais_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+@model ActifWebCRUD.Models.SubtipoActivo
+
+@{
+    ViewData["Title"] = "Crear Subtipo de Activo";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Subtipo de Activo</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="subtipoactivo_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdSubtipoActivo" class="control-label"></label>
+                        <input asp-for="IdSubtipoActivo" class="form-control" type="number" id="subtipoactivo_create_idsubtipoactivo" />
+                        <span asp-validation-for="IdSubtipoActivo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdTipoActivo" class="control-label"></label>
+                        <select asp-for="IdTipoActivo" class="form-control" asp-items="ViewBag.IdTipoActivo" id="subtipoactivo_create_idtipoactivo">
+                        </select>
+                        <span asp-validation-for="IdTipoActivo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="subtipoactivo_create_descripcion" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Actualizar" class="control-label"></label>
+                        <input asp-for="Actualizar" class="form-control" maxlength="1" id="subtipoactivo_create_actualizar" />
+                        <span asp-validation-for="Actualizar" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="control-label"></label>
+                        <input asp-for="Codigo" class="form-control" maxlength="6" id="subtipoactivo_create_codigo" />
+                        <span asp-validation-for="Codigo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="subtipoactivo_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="subtipoactivo_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,56 @@
+@model ActifWebCRUD.Models.Moneda
+
+@{
+    ViewData["Title"] = "Eliminar Moneda";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="alert alert-warning" role="alert">
+        <h4>¿Está seguro de que desea eliminar esta moneda?</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdMoneda)
+                </dt>
+                <dd class="col-sm-8" id="moneda_delete_idmoneda">
+                    @Html.DisplayFor(model => model.IdMoneda)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Pais)
+                </dt>
+                <dd class="col-sm-8" id="moneda_delete_pais">
+                    @(Model.Pais?.Nombre ?? "N/A")
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-8" id="moneda_delete_nombre">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Simbolo)
+                </dt>
+                <dd class="col-sm-8" id="moneda_delete_simbolo">
+                    @Html.DisplayFor(model => model.Simbolo)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete" id="moneda_delete_form">
+                <input type="hidden" asp-for="IdMoneda" />
+                <button type="submit" class="btn btn-danger" id="moneda_delete_confirmar">Eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="moneda_delete_cancelar">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

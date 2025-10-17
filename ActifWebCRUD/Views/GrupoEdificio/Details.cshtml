@@ -1,0 +1,31 @@
+@model ActifWebCRUD.Models.GrupoEdificio
+
+@{
+    ViewData["Title"] = "Detalles Grupo Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles del Grupo Edificio</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdGrupo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdGrupo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Grupo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Grupo)
+            </dd>
+        </dl>
+
+        <div class="form-group mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.IdGrupo" class="btn btn-primary" id="grupoedificio_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="grupoedificio_details_back">Volver a la Lista</a>
+        </div>
+    </div>
+</div>

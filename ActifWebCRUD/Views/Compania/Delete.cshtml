@@ -1,0 +1,56 @@
+@model ActifWebCRUD.Models.Compania
+
+@{
+    ViewData["Title"] = "Eliminar Compania";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Compania</h1>
+
+    <div class="delete-confirmation">
+        <div class="delete-warning">
+            <h5>Advertencia</h5>
+            <p>Esta seguro que desea eliminar esta compania?</p>
+        </div>
+
+        <div class="delete-details">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdCompania)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdCompania)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Nombre)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Rfc)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Rfc)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.FechaInicioEjerc)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.FechaInicioEjerc)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CalleNumero)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.CalleNumero)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Colonia)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Colonia)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DelegMpio)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.DelegMpio)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CodigoPostal)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.CodigoPostal)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Telefono)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Telefono)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Division)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Division)</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" id="compania_delete_form">
+            <input type="hidden" asp-for="IdCompania" />
+            <button type="submit" class="btn btn-danger" id="compania_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="compania_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

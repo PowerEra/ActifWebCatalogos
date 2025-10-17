@@ -1,0 +1,38 @@
+@model ActifWebCRUD.Models.ClaseTipoCambio
+
+@{
+    ViewData["Title"] = "Eliminar Clase Tipo de Cambio";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+    <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdClaseTipCam)
+                </dt>
+                <dd class="col-sm-8" id="clasetipocambio_delete_idclasetipocam">
+                    @Html.DisplayFor(model => model.IdClaseTipCam)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </dt>
+                <dd class="col-sm-8" id="clasetipocambio_delete_descripcion">
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete" id="clasetipocambio_delete_form">
+                <input type="hidden" asp-for="IdClaseTipCam" />
+                <input type="submit" value="Eliminar" class="btn btn-danger" id="clasetipocambio_delete_confirmar" />
+                <a asp-action="Index" class="btn btn-secondary" id="clasetipocambio_delete_cancelar">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

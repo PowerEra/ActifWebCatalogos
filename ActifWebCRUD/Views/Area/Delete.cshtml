@@ -1,0 +1,50 @@
+@model ActifWebCRUD.Models.Area
+
+@{
+    ViewData["Title"] = "Eliminar Area";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Area</h1>
+
+    <div class="delete-confirmation">
+        <div class="delete-warning">
+            <h5>Advertencia</h5>
+            <p>Esta seguro que desea eliminar esta area?</p>
+        </div>
+
+        <div class="delete-details">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdArea)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdArea)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Descripcion)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Descripcion)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cta1)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cta1)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cta2)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cta2)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Cta3)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Cta3)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdEdificio)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdEdificio)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdPiso)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdPiso)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdCompania)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdCompania)</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" id="area_delete_form">
+            <input type="hidden" asp-for="IdArea" />
+            <button type="submit" class="btn btn-danger" id="area_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="area_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

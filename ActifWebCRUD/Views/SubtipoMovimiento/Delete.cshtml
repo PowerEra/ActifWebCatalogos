@@ -1,0 +1,61 @@
+@model ActifWebCRUD.Models.SubtipoMovimiento
+
+@{
+    ViewData["Title"] = "Eliminar Subtipo de Movimiento";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Subtipo de Movimiento</h1>
+
+    <h3>¿Está seguro de que desea eliminar este Subtipo de Movimiento?</h3>
+    <div class="alert alert-danger">
+        <p>Esta acción no se puede deshacer.</p>
+    </div>
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdSubtipoMov)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdSubtipoMov)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TipoMovimiento)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.TipoMovimiento.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.AfectacionInterfaz)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.AfectacionInterfaz)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FlgVisualizar)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FlgVisualizar)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FlgGrabahist)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FlgGrabahist)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="subtipomovimiento_delete_form">
+            <input type="hidden" asp-for="IdSubtipoMov" />
+            <button type="submit" class="btn btn-danger" id="subtipomovimiento_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="subtipomovimiento_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

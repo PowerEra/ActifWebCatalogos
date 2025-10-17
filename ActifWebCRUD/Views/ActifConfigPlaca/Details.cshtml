@@ -1,0 +1,56 @@
+@model ActifWebCRUD.Models.ActifConfigPlaca
+
+@{
+    ViewData["Title"] = "Detalles de Configuracion de Placa";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles de Configuracion de Placa</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdConfigPlaca)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdConfigPlaca)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.Compania != null)
+                {
+                    @Html.DisplayFor(model => model.Compania.Nombre)
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IdCompania)
+                }
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Prefijo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Prefijo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.MinDigitos)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MinDigitos)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.MaxDigitos)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MaxDigitos)
+            </dd>
+        </dl>
+
+        <div class="form-group mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.IdConfigPlaca" class="btn btn-primary" id="actifconfigplaca_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="actifconfigplaca_details_back">Volver al Listado</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@model ActifWebCRUD.Models.SignificadoId
+
+@{
+    ViewData["Title"] = "Editar Significado ID";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Significado ID</h1>
+
+    <div class="form-container">
+        <form asp-action="Edit" id="significadoid_edit_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdSignificadoId" />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="IdSignificadoId" class="control-label"></label>
+                        <input asp-for="IdSignificadoId" class="form-control" id="significadoid_edit_id" readonly disabled />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="significadoid_edit_descripcion" maxlength="25" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="significadoid_edit_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="significadoid_edit_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

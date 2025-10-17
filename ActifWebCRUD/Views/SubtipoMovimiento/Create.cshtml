@@ -1,0 +1,67 @@
+@model ActifWebCRUD.Models.SubtipoMovimiento
+
+@{
+    ViewData["Title"] = "Crear Subtipo de Movimiento";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Subtipo de Movimiento</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="subtipomovimiento_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdTipoMov" class="control-label"></label>
+                        <select asp-for="IdTipoMov" class="form-control" asp-items="ViewBag.IdTipoMov" id="subtipomovimiento_create_idtipomov">
+                            <option value="">-- Seleccione un Tipo de Movimiento --</option>
+                        </select>
+                        <span asp-validation-for="IdTipoMov" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="subtipomovimiento_create_descripcion" maxlength="25" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="AfectacionInterfaz" class="control-label"></label>
+                        <input asp-for="AfectacionInterfaz" class="form-control" id="subtipomovimiento_create_afectacioninterfaz" maxlength="1" />
+                        <span asp-validation-for="AfectacionInterfaz" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FlgVisualizar" class="control-label"></label>
+                        <input asp-for="FlgVisualizar" class="form-control" id="subtipomovimiento_create_flgvisualizar" maxlength="1" />
+                        <span asp-validation-for="FlgVisualizar" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FlgGrabahist" class="control-label"></label>
+                        <input asp-for="FlgGrabahist" class="form-control" id="subtipomovimiento_create_flggrabahist" maxlength="1" />
+                        <span asp-validation-for="FlgGrabahist" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="subtipomovimiento_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="subtipomovimiento_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

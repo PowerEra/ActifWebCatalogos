@@ -1,0 +1,43 @@
+@model ActifWebCRUD.Models.ActifCompaniaTipoDepreciacion
+
+@{
+    ViewData["Title"] = "Crear Compania Tipo Depreciacion";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Compania Tipo Depreciacion</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" id="actifcompaniatipodepreciacion_create_form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdCompania" class="control-label"></label>
+                    <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="actifcompaniatipodepreciacion_create_idcompania">
+                        <option value="">-- Seleccione Compania --</option>
+                    </select>
+                    <span asp-validation-for="IdCompania" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdTipoDep" class="control-label"></label>
+                    <select asp-for="IdTipoDep" class="form-control" asp-items="ViewBag.IdTipoDep" id="actifcompaniatipodepreciacion_create_idtipodep">
+                        <option value="">-- Seleccione Tipo Depreciacion --</option>
+                    </select>
+                    <span asp-validation-for="IdTipoDep" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <input type="submit" value="Guardar" class="btn btn-primary" id="actifcompaniatipodepreciacion_create_submit" />
+                    <a asp-action="Index" class="btn btn-secondary" id="actifcompaniatipodepreciacion_create_cancel">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

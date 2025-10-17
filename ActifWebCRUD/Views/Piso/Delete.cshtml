@@ -1,0 +1,57 @@
+@model ActifWebCRUD.Models.Piso
+
+@{
+    ViewData["Title"] = "Eliminar Piso";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Piso</h1>
+
+    <h3>¿Está seguro que desea eliminar este piso?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdPiso)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdPiso)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+            <dt class="col-sm-3">
+                Nombre Compania
+            </dt>
+            <dd class="col-sm-9">
+                N/A (No disponible por incompatibilidad de tipos)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdPisoAnterior)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdPisoAnterior)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="piso_delete_form">
+            <input type="hidden" asp-for="IdPiso" />
+            <button type="submit" class="btn btn-danger" id="piso_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="piso_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

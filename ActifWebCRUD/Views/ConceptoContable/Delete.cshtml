@@ -1,0 +1,63 @@
+@model ActifWebCRUD.Models.ConceptoContable
+
+@{
+    ViewData["Title"] = "Eliminar Concepto Contable";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Concepto Contable</h1>
+
+    <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdConcepto)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdConcepto)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Compania)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.Compania?.Nombre ?? "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TipoActivo)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.TipoActivo?.Descripcion ?? "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.SubtipoActivo)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.SubtipoActivo?.Descripcion ?? "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Cta101)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Cta101)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Cta201)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Cta201)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="conceptocontable_delete_form">
+            <input type="hidden" asp-for="IdConcepto" />
+            <button type="submit" class="btn btn-danger" id="conceptocontable_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="conceptocontable_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

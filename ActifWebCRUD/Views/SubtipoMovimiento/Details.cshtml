@@ -1,0 +1,54 @@
+@model ActifWebCRUD.Models.SubtipoMovimiento
+
+@{
+    ViewData["Title"] = "Detalles Subtipo de Movimiento";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles del Subtipo de Movimiento</h1>
+
+    <div>
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdSubtipoMov)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdSubtipoMov)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TipoMovimiento)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.TipoMovimiento.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.AfectacionInterfaz)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.AfectacionInterfaz)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FlgVisualizar)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FlgVisualizar)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FlgGrabahist)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FlgGrabahist)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.IdSubtipoMov" class="btn btn-primary" id="subtipomovimiento_details_edit">Editar</a>
+        <a asp-action="Index" class="btn btn-secondary" id="subtipomovimiento_details_back">Volver al Listado</a>
+    </div>
+</div>

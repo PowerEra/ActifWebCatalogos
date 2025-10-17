@@ -1,0 +1,51 @@
+@model ActifWebCRUD.Models.Moneda
+
+@{
+    ViewData["Title"] = "Detalles de Moneda";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdMoneda)
+                </dt>
+                <dd class="col-sm-8" id="moneda_details_idmoneda">
+                    @Html.DisplayFor(model => model.IdMoneda)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Pais)
+                </dt>
+                <dd class="col-sm-8" id="moneda_details_pais">
+                    @(Model.Pais?.Nombre ?? "N/A")
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-8" id="moneda_details_nombre">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Simbolo)
+                </dt>
+                <dd class="col-sm-8" id="moneda_details_simbolo">
+                    @Html.DisplayFor(model => model.Simbolo)
+                </dd>
+            </dl>
+
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.IdMoneda" class="btn btn-warning" id="moneda_details_editar">Editar</a>
+                <a asp-action="Index" class="btn btn-secondary" id="moneda_details_volver">Volver al listado</a>
+            </div>
+        </div>
+    </div>
+</div>

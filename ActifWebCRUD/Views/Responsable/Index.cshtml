@@ -1,0 +1,97 @@
+@model IEnumerable<ActifWebCRUD.Models.VResponsable>
+
+@{
+    ViewData["Title"] = "Responsables";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>@ViewData["Title"]</h2>
+        <div>
+            <a asp-action="ExportToExcel" class="btn btn-success me-2" id="responsable_exportar_excel">
+                <i class="bi bi-file-earmark-excel"></i> Exportar a Excel
+            </a>
+            <a asp-action="Create" class="btn btn-primary" id="responsable_agregar">
+                <i class="bi bi-file-earmark-plus"></i> Agregar
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" id="responsable_datatable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Compania</th>
+                    <th>Centro de Costo</th>
+                    <th>Nombre</th>
+                    <th>Puesto</th>
+                    <th>Numero de Empleado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdResponsable</td>
+                        <td>@(item.Compania ?? "")</td>
+                        <td>@(item.CentroCosto ?? "")</td>
+                        <td>@(item.Nombre ?? "")</td>
+                        <td>@(item.PuestoResponsable ?? "")</td>
+                        <td>@(item.NumeroEmpleado?.ToString() ?? "")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdResponsable" class="btn btn-sm btn-warning" id="responsable_editar_@item.IdResponsable" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdResponsable" class="btn btn-sm btn-info" id="responsable_detalles_@item.IdResponsable" title="Detalles">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdResponsable" class="btn btn-sm btn-danger" id="responsable_eliminar_@item.IdResponsable" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#responsable_datatable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+                },
+                "pageLength": 50,
+                "order": [[0, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 6 }
+                ],
+                initComplete: function () {
+                    this.api().columns([0, 1, 2, 3, 4, 5]).every(function () {
+                        var column = this;
+                        var title = $(column.header()).text();
+                        var input = $('<input type="text" class="form-control form-control-sm" placeholder="Filtrar ' + title + '" />')
+                            .appendTo($(column.header()))
+                            .on('click', function (e) {
+                                e.stopPropagation();
+                            })
+                            .on('keyup change clear', function () {
+                                if (column.search() !== this.value) {
+                                    column.search(this.value).draw();
+                                }
+                            });
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,184 @@
+@model ActifWebCRUD.Models.Edificio
+
+@{
+    ViewData["Title"] = "Crear Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Edificio</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="edificio_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="edificio_create_idcompania">
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="edificio_create_descripcion" maxlength="50" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CalleNumero" class="control-label"></label>
+                        <input asp-for="CalleNumero" class="form-control" id="edificio_create_callenumero" maxlength="50" />
+                        <span asp-validation-for="CalleNumero" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Colonia" class="control-label"></label>
+                        <input asp-for="Colonia" class="form-control" id="edificio_create_colonia" maxlength="50" />
+                        <span asp-validation-for="Colonia" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DelegMpio" class="control-label"></label>
+                        <input asp-for="DelegMpio" class="form-control" id="edificio_create_delegmpio" maxlength="50" />
+                        <span asp-validation-for="DelegMpio" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Ciudad" class="control-label"></label>
+                        <input asp-for="Ciudad" class="form-control" id="edificio_create_ciudad" maxlength="50" />
+                        <span asp-validation-for="Ciudad" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="CodigoPostal" class="control-label"></label>
+                        <input asp-for="CodigoPostal" class="form-control" id="edificio_create_codigopostal" maxlength="10" />
+                        <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdEstado" class="control-label"></label>
+                        <select asp-for="IdEstado" class="form-control" asp-items="ViewBag.IdEstado" id="edificio_create_idestado">
+                        </select>
+                        <span asp-validation-for="IdEstado" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" id="edificio_create_telefono" maxlength="20" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Cta1" class="control-label"></label>
+                        <input asp-for="Cta1" class="form-control" id="edificio_create_cta1" maxlength="50" />
+                        <span asp-validation-for="Cta1" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Cta2" class="control-label"></label>
+                        <input asp-for="Cta2" class="form-control" id="edificio_create_cta2" maxlength="50" />
+                        <span asp-validation-for="Cta2" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Cta3" class="control-label"></label>
+                        <input asp-for="Cta3" class="form-control" id="edificio_create_cta3" maxlength="50" />
+                        <span asp-validation-for="Cta3" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Cta4" class="control-label"></label>
+                        <input asp-for="Cta4" class="form-control" id="edificio_create_cta4" maxlength="50" />
+                        <span asp-validation-for="Cta4" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Cta5" class="control-label"></label>
+                        <input asp-for="Cta5" class="form-control" id="edificio_create_cta5" maxlength="50" />
+                        <span asp-validation-for="Cta5" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Cta6" class="control-label"></label>
+                        <input asp-for="Cta6" class="form-control" id="edificio_create_cta6" maxlength="50" />
+                        <span asp-validation-for="Cta6" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Inactivo" class="control-label"></label>
+                        <input asp-for="Inactivo" class="form-control" id="edificio_create_inactivo" type="number" />
+                        <span asp-validation-for="Inactivo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdEdificioOrig" class="control-label"></label>
+                        <input asp-for="IdEdificioOrig" class="form-control" id="edificio_create_idedificioorig" type="number" />
+                        <span asp-validation-for="IdEdificioOrig" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdCompaniaOrig" class="control-label"></label>
+                        <input asp-for="IdCompaniaOrig" class="form-control" id="edificio_create_idcompaniaorig" type="number" />
+                        <span asp-validation-for="IdCompaniaOrig" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="edificio_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="edificio_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

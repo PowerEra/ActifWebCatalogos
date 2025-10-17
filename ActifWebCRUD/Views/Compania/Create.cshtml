@@ -1,0 +1,160 @@
+@model ActifWebCRUD.Models.Compania
+
+@{
+    ViewData["Title"] = "Crear Compania";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nueva Compania</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="compania_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" id="compania_create_nombre" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Rfc" class="control-label"></label>
+                        <input asp-for="Rfc" class="form-control" id="compania_create_rfc" />
+                        <span asp-validation-for="Rfc" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FechaInicioEjerc" class="control-label"></label>
+                        <input asp-for="FechaInicioEjerc" class="form-control" type="date" id="compania_create_fechainicio" />
+                        <span asp-validation-for="FechaInicioEjerc" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" id="compania_create_telefono" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="CalleNumero" class="control-label"></label>
+                        <input asp-for="CalleNumero" class="form-control" id="compania_create_calle" />
+                        <span asp-validation-for="CalleNumero" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Colonia" class="control-label"></label>
+                        <input asp-for="Colonia" class="form-control" id="compania_create_colonia" />
+                        <span asp-validation-for="Colonia" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DelegMpio" class="control-label"></label>
+                        <input asp-for="DelegMpio" class="form-control" id="compania_create_delegmpio" />
+                        <span asp-validation-for="DelegMpio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CodigoPostal" class="control-label"></label>
+                        <input asp-for="CodigoPostal" class="form-control" id="compania_create_cp" />
+                        <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdEstado" class="control-label"></label>
+                        <input asp-for="IdEstado" class="form-control" type="number" id="compania_create_estado" />
+                        <span asp-validation-for="IdEstado" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Cuenta" class="control-label"></label>
+                        <input asp-for="Cuenta" class="form-control" id="compania_create_cuenta" />
+                        <span asp-validation-for="Cuenta" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Division" class="control-label"></label>
+                        <input asp-for="Division" class="form-control" id="compania_create_division" />
+                        <span asp-validation-for="Division" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DefaultIdMoneda" class="control-label"></label>
+                        <input asp-for="DefaultIdMoneda" class="form-control" type="number" id="compania_create_moneda" />
+                        <span asp-validation-for="DefaultIdMoneda" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DefaultIdPais" class="control-label"></label>
+                        <input asp-for="DefaultIdPais" class="form-control" type="number" id="compania_create_pais" />
+                        <span asp-validation-for="DefaultIdPais" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="DefaultTipoCambio" class="control-label"></label>
+                        <input asp-for="DefaultTipoCambio" class="form-control" type="number" step="0.01" id="compania_create_tipocambio" />
+                        <span asp-validation-for="DefaultTipoCambio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequerirDocumento" class="control-label"></label>
+                        <input asp-for="RequerirDocumento" class="form-control" type="number" id="compania_create_requerirodocumento" />
+                        <span asp-validation-for="RequerirDocumento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequerirAprobacion" class="control-label"></label>
+                        <input asp-for="RequerirAprobacion" class="form-control" type="number" id="compania_create_requeriraprobacion" />
+                        <span asp-validation-for="RequerirAprobacion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="compania_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="compania_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

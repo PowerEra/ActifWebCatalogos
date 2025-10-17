@@ -1,0 +1,40 @@
+@model ActifWebCRUD.Models.GrupoEdificioDetalle
+
+@{
+    ViewData["Title"] = "Eliminar Grupo Edificio Detalle";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Grupo Edificio Detalle</h1>
+
+    <div class="alert alert-warning">
+        <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9" id="grupoedificiodetalle_delete_id">@Model.IdGE</dd>
+
+                <dt class="col-sm-3">Grupo</dt>
+                <dd class="col-sm-9" id="grupoedificiodetalle_delete_grupo">@(Model.GrupoEdificio?.Grupo ?? "")</dd>
+
+                <dt class="col-sm-3">Edificio</dt>
+                <dd class="col-sm-9" id="grupoedificiodetalle_delete_edificio">@Model.IdEdificio</dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete" id="grupoedificiodetalle_delete_form">
+        <input type="hidden" asp-for="IdGE" />
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-danger" id="grupoedificiodetalle_delete_submit">
+                <i class="fas fa-trash"></i> Eliminar
+            </button>
+            <a asp-action="Index" class="btn btn-secondary" id="grupoedificiodetalle_delete_cancel">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>

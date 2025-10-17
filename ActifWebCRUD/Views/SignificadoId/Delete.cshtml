@@ -1,0 +1,33 @@
+@model ActifWebCRUD.Models.SignificadoId
+
+@{
+    ViewData["Title"] = "Eliminar Significado ID";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Significado ID</h1>
+
+    <h3 class="text-danger">¿Está seguro de que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdSignificadoId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdSignificadoId)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="significadoid_delete_form">
+            <input type="hidden" asp-for="IdSignificadoId" />
+            <button type="submit" class="btn btn-danger" id="significadoid_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="significadoid_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+@model ActifWebCRUD.Models.Control
+
+@{
+    ViewData["Title"] = "Eliminar Control";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Control</h1>
+
+    <h3>¿Está seguro de que desea eliminar este control?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdControl)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdControl)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Contenido)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Contenido)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FlgUsar)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FlgUsar)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Tipo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Tipo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Longitud)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Longitud)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Decimales)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Decimales)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="control_delete_form">
+            <input type="hidden" asp-for="IdControl" id="control_delete_idcontrol" />
+            <button type="submit" class="btn btn-danger" id="control_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="control_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

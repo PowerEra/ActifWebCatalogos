@@ -1,0 +1,36 @@
+@model ActifWebCRUD.Models.INPC2
+
+@{
+    ViewData["Title"] = "Detalles INPC2";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles del Registro INPC2</h1>
+
+    <div class="details-container">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdInpc)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.IdInpc)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Anio)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Anio)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Mes)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Mes)</dd>
+
+            <dt class="col-sm-3">Grupo Simulación</dt>
+            <dd class="col-sm-9">@Model.GrupoSimulacion?.Descripcion</dd>
+
+            <dt class="col-sm-3">País</dt>
+            <dd class="col-sm-9">@Model.Pais?.Nombre</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Indice)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Indice)</dd>
+        </dl>
+
+        <div class="mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.IdInpc" class="btn btn-primary" id="inpc2_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="inpc2_details_back">Volver al Listado</a>
+        </div>
+    </div>
+</div>

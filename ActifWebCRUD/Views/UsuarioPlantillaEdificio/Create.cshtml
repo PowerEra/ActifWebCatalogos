@@ -1,0 +1,43 @@
+@model ActifWebCRUD.Models.UsuarioPlantillaEdificio
+
+@{
+    ViewData["Title"] = "Crear Usuario Plantilla Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Usuario Plantilla Edificio</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" id="usuarioplantillaedificio_create_form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdUser" class="control-label">Usuario</label>
+                    <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser" id="usuarioplantillaedificio_create_iduser">
+                        <option value="">-- Seleccione un Usuario --</option>
+                    </select>
+                    <span asp-validation-for="IdUser" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdPlantilla" class="control-label">Plantilla Edificio</label>
+                    <select asp-for="IdPlantilla" class="form-control" asp-items="ViewBag.IdPlantilla" id="usuarioplantillaedificio_create_idplantilla">
+                        <option value="">-- Seleccione una Plantilla --</option>
+                    </select>
+                    <span asp-validation-for="IdPlantilla" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="usuarioplantillaedificio_create_submit">Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary" id="usuarioplantillaedificio_create_cancel">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

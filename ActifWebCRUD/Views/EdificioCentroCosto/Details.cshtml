@@ -1,0 +1,61 @@
+@model ActifWebCRUD.Models.EdificioCentroCosto
+
+@{
+    ViewData["Title"] = "Detalles Edificio Centro Costo";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles de Relación Edificio-Centro Costo</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificioCentroCosto)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificioCentroCosto)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+            <dt class="col-sm-3">
+                Nombre Compañía
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Compania?.Nombre
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificio)
+            </dd>
+            <dt class="col-sm-3">
+                Descripción Edificio
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Edificio?.Descripcion
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCentroCosto)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdCentroCosto)
+            </dd>
+            <dt class="col-sm-3">
+                Centro Costo
+            </dt>
+            <dd class="col-sm-9">
+                @Model.CentroCosto?.Descripcion
+            </dd>
+        </dl>
+
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.IdEdificioCentroCosto" class="btn btn-primary" id="edificiocentrocosto_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="edificiocentrocosto_details_back">Volver al Listado</a>
+        </div>
+    </div>
+</div>

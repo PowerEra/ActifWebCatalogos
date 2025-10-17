@@ -1,0 +1,53 @@
+@model ActifWebCRUD.Models.EdificioPiso
+
+@{
+    ViewData["Title"] = "Eliminar Edificio Piso";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Relación Edificio-Piso</h1>
+
+    <h3>¿Está seguro que desea eliminar esta relación?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+            <dt class="col-sm-3">
+                Nombre Compañía
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Compania?.Nombre
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdPiso)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdPiso)
+            </dd>
+            <dt class="col-sm-3">
+                Descripción Piso
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Piso?.Descripcion
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="edificiopiso_delete_form">
+            <input type="hidden" asp-for="IdCompania" />
+            <input type="hidden" asp-for="IdEdificio" />
+            <input type="hidden" asp-for="IdPiso" />
+            <button type="submit" class="btn btn-danger" id="edificiopiso_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="edificiopiso_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

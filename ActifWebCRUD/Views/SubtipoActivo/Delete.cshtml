@@ -1,0 +1,51 @@
+@model ActifWebCRUD.Models.SubtipoActivo
+
+@{
+    ViewData["Title"] = "Eliminar Subtipo de Activo";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Subtipo de Activo</h1>
+
+    <h3>Esta seguro que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdSubtipoActivo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdSubtipoActivo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdTipoActivo)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.TipoActivo?.Descripcion ?? "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Actualizar)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Actualizar)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Codigo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Codigo)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="subtipoactivo_delete_form">
+            <input type="hidden" asp-for="IdSubtipoActivo" />
+            <button type="submit" class="btn btn-danger" id="subtipoactivo_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="subtipoactivo_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

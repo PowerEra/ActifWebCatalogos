@@ -1,0 +1,49 @@
+@model ActifWebCRUD.Models.ActifCompaniaTipoDepreciacion
+
+@{
+    ViewData["Title"] = "Detalles Compania Tipo Depreciacion";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles Compania Tipo Depreciacion</h1>
+
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompaniaDepreciacion)
+            </dt>
+            <dd class="col-sm-9" id="actifcompaniatipodepreciacion_details_idcompaniadepreciacion">
+                @Html.DisplayFor(model => model.IdCompaniaDepreciacion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9" id="actifcompaniatipodepreciacion_details_idcompania">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+            <dt class="col-sm-3">
+                Nombre Compania
+            </dt>
+            <dd class="col-sm-9" id="actifcompaniatipodepreciacion_details_nombrecompania">
+                @Html.DisplayFor(model => model.Compania.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdTipoDep)
+            </dt>
+            <dd class="col-sm-9" id="actifcompaniatipodepreciacion_details_idtipodep">
+                @Html.DisplayFor(model => model.IdTipoDep)
+            </dd>
+            <dt class="col-sm-3">
+                Descripcion Tipo Depreciacion
+            </dt>
+            <dd class="col-sm-9" id="actifcompaniatipodepreciacion_details_descripciontipodep">
+                @Html.DisplayFor(model => model.TipoDepreciacion.Descripcion)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.IdCompaniaDepreciacion" class="btn btn-primary" id="actifcompaniatipodepreciacion_details_edit">Editar</a>
+        <a asp-action="Index" class="btn btn-secondary" id="actifcompaniatipodepreciacion_details_back">Volver al Listado</a>
+    </div>
+</div>

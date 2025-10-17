@@ -1,0 +1,51 @@
+@model ActifWebCRUD.Models.UsersCampanias
+
+@{
+    ViewData["Title"] = "Detalles Usuario Compania";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles Relacion Usuario-Compania</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdUserCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdUserCompania)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdUser)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.User != null)
+                {
+                    @Html.DisplayFor(model => model.User.UserName)
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IdUser)
+                }
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.Compania != null)
+                {
+                    @Html.DisplayFor(model => model.Compania.Nombre)
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IdCompania)
+                }
+            </dd>
+        </dl>
+
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.IdUserCompania" class="btn btn-primary" id="userscampanias_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="userscampanias_details_back">Volver al Listado</a>
+        </div>
+    </div>
+</div>

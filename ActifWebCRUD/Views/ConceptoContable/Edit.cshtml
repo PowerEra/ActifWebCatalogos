@@ -1,0 +1,314 @@
+@model ActifWebCRUD.Models.ConceptoContable
+
+@{
+    ViewData["Title"] = "Editar Concepto Contable";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Concepto Contable</h1>
+
+    <div class="form-container">
+        <form asp-action="Edit" id="conceptocontable_edit_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdConcepto" />
+
+            <h4 class="mt-3 mb-3">Información General</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdConcepto" class="control-label"></label>
+                        <input asp-for="IdConcepto" class="form-control" id="conceptocontable_edit_idconcepto" type="number" readonly />
+                        <span asp-validation-for="IdConcepto" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="conceptocontable_edit_idcompania">
+                            <option value="">-- Seleccione Compañía --</option>
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdTipoActivo" class="control-label"></label>
+                        <select asp-for="IdTipoActivo" class="form-control" asp-items="ViewBag.IdTipoActivo" id="conceptocontable_edit_idtipoactivo">
+                            <option value="">-- Seleccione Tipo Activo --</option>
+                        </select>
+                        <span asp-validation-for="IdTipoActivo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdSubtipoActivo" class="control-label"></label>
+                        <select asp-for="IdSubtipoActivo" class="form-control" asp-items="ViewBag.IdSubtipoActivo" id="conceptocontable_edit_idsubtipoactivo">
+                            <option value="">-- Seleccione Subtipo Activo --</option>
+                        </select>
+                        <span asp-validation-for="IdSubtipoActivo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdVariable" class="control-label"></label>
+                        <input asp-for="IdVariable" class="form-control" id="conceptocontable_edit_idvariable" type="number" />
+                        <span asp-validation-for="IdVariable" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="IdEdificio" class="control-label"></label>
+                        <input asp-for="IdEdificio" class="form-control" id="conceptocontable_edit_idedificio" type="number" />
+                        <span asp-validation-for="IdEdificio" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="conceptocontable_edit_descripcion" maxlength="50" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion2" class="control-label"></label>
+                        <input asp-for="Descripcion2" class="form-control" id="conceptocontable_edit_descripcion2" maxlength="100" />
+                        <span asp-validation-for="Descripcion2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion200" class="control-label"></label>
+                        <input asp-for="Descripcion200" class="form-control" id="conceptocontable_edit_descripcion200" maxlength="100" />
+                        <span asp-validation-for="Descripcion200" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mt-4 mb-3">Cuentas Grupo 1</h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta101" class="control-label"></label>
+                        <input asp-for="Cta101" class="form-control" id="conceptocontable_edit_cta101" maxlength="8" />
+                        <span asp-validation-for="Cta101" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta102" class="control-label"></label>
+                        <input asp-for="Cta102" class="form-control" id="conceptocontable_edit_cta102" maxlength="7" />
+                        <span asp-validation-for="Cta102" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta103" class="control-label"></label>
+                        <input asp-for="Cta103" class="form-control" id="conceptocontable_edit_cta103" maxlength="6" />
+                        <span asp-validation-for="Cta103" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta104" class="control-label"></label>
+                        <input asp-for="Cta104" class="form-control" id="conceptocontable_edit_cta104" maxlength="6" />
+                        <span asp-validation-for="Cta104" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta105" class="control-label"></label>
+                        <input asp-for="Cta105" class="form-control" id="conceptocontable_edit_cta105" maxlength="6" />
+                        <span asp-validation-for="Cta105" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta106" class="control-label"></label>
+                        <input asp-for="Cta106" class="form-control" id="conceptocontable_edit_cta106" maxlength="6" />
+                        <span asp-validation-for="Cta106" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Caab01" class="control-label"></label>
+                        <input asp-for="Caab01" class="form-control" id="conceptocontable_edit_caab01" type="number" />
+                        <span asp-validation-for="Caab01" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Desg01" class="control-label"></label>
+                        <input asp-for="Desg01" class="form-control" id="conceptocontable_edit_desg01" type="number" />
+                        <span asp-validation-for="Desg01" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Pror01" class="control-label"></label>
+                        <input asp-for="Pror01" class="form-control" id="conceptocontable_edit_pror01" type="number" />
+                        <span asp-validation-for="Pror01" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mt-4 mb-3">Cuentas Grupo 2</h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta201" class="control-label"></label>
+                        <input asp-for="Cta201" class="form-control" id="conceptocontable_edit_cta201" maxlength="8" />
+                        <span asp-validation-for="Cta201" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta202" class="control-label"></label>
+                        <input asp-for="Cta202" class="form-control" id="conceptocontable_edit_cta202" maxlength="6" />
+                        <span asp-validation-for="Cta202" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta203" class="control-label"></label>
+                        <input asp-for="Cta203" class="form-control" id="conceptocontable_edit_cta203" maxlength="6" />
+                        <span asp-validation-for="Cta203" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta204" class="control-label"></label>
+                        <input asp-for="Cta204" class="form-control" id="conceptocontable_edit_cta204" maxlength="6" />
+                        <span asp-validation-for="Cta204" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta205" class="control-label"></label>
+                        <input asp-for="Cta205" class="form-control" id="conceptocontable_edit_cta205" maxlength="6" />
+                        <span asp-validation-for="Cta205" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta206" class="control-label"></label>
+                        <input asp-for="Cta206" class="form-control" id="conceptocontable_edit_cta206" maxlength="6" />
+                        <span asp-validation-for="Cta206" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Caab02" class="control-label"></label>
+                        <input asp-for="Caab02" class="form-control" id="conceptocontable_edit_caab02" type="number" />
+                        <span asp-validation-for="Caab02" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Desg02" class="control-label"></label>
+                        <input asp-for="Desg02" class="form-control" id="conceptocontable_edit_desg02" type="number" />
+                        <span asp-validation-for="Desg02" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Pror02" class="control-label"></label>
+                        <input asp-for="Pror02" class="form-control" id="conceptocontable_edit_pror02" type="number" />
+                        <span asp-validation-for="Pror02" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mt-4 mb-3">Cuentas Grupo 3</h4>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta301" class="control-label"></label>
+                        <input asp-for="Cta301" class="form-control" id="conceptocontable_edit_cta301" maxlength="6" />
+                        <span asp-validation-for="Cta301" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta302" class="control-label"></label>
+                        <input asp-for="Cta302" class="form-control" id="conceptocontable_edit_cta302" maxlength="6" />
+                        <span asp-validation-for="Cta302" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta303" class="control-label"></label>
+                        <input asp-for="Cta303" class="form-control" id="conceptocontable_edit_cta303" maxlength="6" />
+                        <span asp-validation-for="Cta303" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta304" class="control-label"></label>
+                        <input asp-for="Cta304" class="form-control" id="conceptocontable_edit_cta304" maxlength="6" />
+                        <span asp-validation-for="Cta304" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta305" class="control-label"></label>
+                        <input asp-for="Cta305" class="form-control" id="conceptocontable_edit_cta305" maxlength="6" />
+                        <span asp-validation-for="Cta305" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label asp-for="Cta306" class="control-label"></label>
+                        <input asp-for="Cta306" class="form-control" id="conceptocontable_edit_cta306" maxlength="6" />
+                        <span asp-validation-for="Cta306" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Caab03" class="control-label"></label>
+                        <input asp-for="Caab03" class="form-control" id="conceptocontable_edit_caab03" type="number" />
+                        <span asp-validation-for="Caab03" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Desg03" class="control-label"></label>
+                        <input asp-for="Desg03" class="form-control" id="conceptocontable_edit_desg03" type="number" />
+                        <span asp-validation-for="Desg03" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Pror03" class="control-label"></label>
+                        <input asp-for="Pror03" class="form-control" id="conceptocontable_edit_pror03" type="number" />
+                        <span asp-validation-for="Pror03" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="conceptocontable_edit_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="conceptocontable_edit_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

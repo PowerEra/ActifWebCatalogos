@@ -1,0 +1,45 @@
+@model ActifWebCRUD.Models.GrupoSimulacion
+
+@{
+    ViewData["Title"] = "Editar Grupo Simulacion";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Grupo Simulacion</h1>
+
+    <div class="form-container">
+        <form asp-action="Edit" id="gruposimulacion_edit_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdGrupoSimulacion" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="gruposimulacion_edit_descripcion" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Nota" class="control-label"></label>
+                        <textarea asp-for="Nota" class="form-control" rows="4" id="gruposimulacion_edit_nota"></textarea>
+                        <span asp-validation-for="Nota" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="gruposimulacion_edit_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="gruposimulacion_edit_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

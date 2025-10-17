@@ -1,0 +1,78 @@
+@model ActifWebCRUD.Models.PlantillaEdificio
+
+@{
+    ViewData["Title"] = "Crear Plantilla Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nueva Plantilla Edificio</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="plantillaedificio_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Plantilla" class="control-label"></label>
+                        <input asp-for="Plantilla" class="form-control" id="plantillaedificio_create_plantilla" maxlength="120" />
+                        <span asp-validation-for="Plantilla" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdTipoDep" class="control-label"></label>
+                        <select asp-for="IdTipoDep" class="form-control" asp-items="ViewBag.IdTipoDep" id="plantillaedificio_create_idtipodep">
+                        </select>
+                        <span asp-validation-for="IdTipoDep" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="TomaEdificio" class="control-label"></label>
+                        <select asp-for="TomaEdificio" class="form-control" id="plantillaedificio_create_tomaedificio">
+                            <option value="">-- Seleccione --</option>
+                            <option value="true">Sí</option>
+                            <option value="false">No</option>
+                        </select>
+                        <span asp-validation-for="TomaEdificio" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="TomaCC" class="control-label"></label>
+                        <select asp-for="TomaCC" class="form-control" id="plantillaedificio_create_tomacc">
+                            <option value="">-- Seleccione --</option>
+                            <option value="true">Sí</option>
+                            <option value="false">No</option>
+                        </select>
+                        <span asp-validation-for="TomaCC" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="plantillaedificio_create_idcompania">
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="plantillaedificio_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="plantillaedificio_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

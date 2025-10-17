@@ -1,0 +1,44 @@
+@model ActifWebCRUD.Models.INPC2
+
+@{
+    ViewData["Title"] = "Eliminar INPC2";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Registro INPC2</h1>
+
+    <div class="delete-confirmation">
+        <div class="delete-warning">
+            <h5>Advertencia</h5>
+            <p>Esta seguro que desea eliminar este registro INPC2?</p>
+        </div>
+
+        <div class="delete-details">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdInpc)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdInpc)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Anio)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Anio)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Mes)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Mes)</dd>
+
+                <dt class="col-sm-4">Grupo Simulación</dt>
+                <dd class="col-sm-8">@Model.GrupoSimulacion?.Descripcion</dd>
+
+                <dt class="col-sm-4">País</dt>
+                <dd class="col-sm-8">@Model.Pais?.Nombre</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Indice)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Indice)</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" id="inpc2_delete_form">
+            <input type="hidden" asp-for="IdInpc" />
+            <button type="submit" class="btn btn-danger" id="inpc2_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="inpc2_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

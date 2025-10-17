@@ -1,0 +1,53 @@
+@model ActifWebCRUD.Models.UsuarioEdificio
+
+@{
+    ViewData["Title"] = "Crear Usuario Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Usuario Edificio</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="usuarioedificio_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label"></label>
+                        <select asp-for="IdUsuario" class="form-control" asp-items="ViewBag.IdUsuario" id="usuarioedificio_create_idusuario">
+                        </select>
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="usuarioedificio_create_idcompania">
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="IdEdificio" class="control-label"></label>
+                        <select asp-for="IdEdificio" class="form-control" asp-items="ViewBag.IdEdificio" id="usuarioedificio_create_idedificio">
+                        </select>
+                        <span asp-validation-for="IdEdificio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="usuarioedificio_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="usuarioedificio_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

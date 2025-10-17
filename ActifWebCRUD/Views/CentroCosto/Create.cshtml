@@ -1,0 +1,210 @@
+@model ActifWebCRUD.Models.CentroCosto
+
+@{
+    ViewData["Title"] = "Crear Centro de Costo";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Centro de Costo</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="centrocosto_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="centrocosto_create_idcompania">
+                            <option value="">-- Seleccione Compañía --</option>
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="control-label"></label>
+                        <input asp-for="Codigo" class="form-control" id="centrocosto_create_codigo" maxlength="50" />
+                        <span asp-validation-for="Codigo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="centrocosto_create_descripcion" maxlength="255" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Responsable" class="control-label"></label>
+                        <input asp-for="Responsable" class="form-control" id="centrocosto_create_responsable" maxlength="100" />
+                        <span asp-validation-for="Responsable" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status" class="form-control" id="centrocosto_create_status">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta1" class="control-label"></label>
+                        <input asp-for="Cta1" class="form-control" id="centrocosto_create_cta1" maxlength="50" />
+                        <span asp-validation-for="Cta1" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta2" class="control-label"></label>
+                        <input asp-for="Cta2" class="form-control" id="centrocosto_create_cta2" maxlength="50" />
+                        <span asp-validation-for="Cta2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta3" class="control-label"></label>
+                        <input asp-for="Cta3" class="form-control" id="centrocosto_create_cta3" maxlength="50" />
+                        <span asp-validation-for="Cta3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta4" class="control-label"></label>
+                        <input asp-for="Cta4" class="form-control" id="centrocosto_create_cta4" maxlength="50" />
+                        <span asp-validation-for="Cta4" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta5" class="control-label"></label>
+                        <input asp-for="Cta5" class="form-control" id="centrocosto_create_cta5" maxlength="50" />
+                        <span asp-validation-for="Cta5" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta6" class="control-label"></label>
+                        <input asp-for="Cta6" class="form-control" id="centrocosto_create_cta6" maxlength="50" />
+                        <span asp-validation-for="Cta6" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Prorra" class="control-label"></label>
+                        <input asp-for="Prorra" class="form-control" id="centrocosto_create_prorra" type="number" />
+                        <span asp-validation-for="Prorra" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="TransEntra" class="control-label"></label>
+                        <input asp-for="TransEntra" class="form-control" id="centrocosto_create_transentra" type="number" step="0.01" />
+                        <span asp-validation-for="TransEntra" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="TransSale" class="control-label"></label>
+                        <input asp-for="TransSale" class="form-control" id="centrocosto_create_transsale" type="number" step="0.01" />
+                        <span asp-validation-for="TransSale" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Bajas" class="control-label"></label>
+                        <input asp-for="Bajas" class="form-control" id="centrocosto_create_bajas" type="number" step="0.01" />
+                        <span asp-validation-for="Bajas" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Altas" class="control-label"></label>
+                        <input asp-for="Altas" class="form-control" id="centrocosto_create_altas" type="number" step="0.01" />
+                        <span asp-validation-for="Altas" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta11" class="control-label"></label>
+                        <input asp-for="Cta11" class="form-control" id="centrocosto_create_cta11" maxlength="50" />
+                        <span asp-validation-for="Cta11" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta12" class="control-label"></label>
+                        <input asp-for="Cta12" class="form-control" id="centrocosto_create_cta12" maxlength="50" />
+                        <span asp-validation-for="Cta12" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta13" class="control-label"></label>
+                        <input asp-for="Cta13" class="form-control" id="centrocosto_create_cta13" maxlength="50" />
+                        <span asp-validation-for="Cta13" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta14" class="control-label"></label>
+                        <input asp-for="Cta14" class="form-control" id="centrocosto_create_cta14" maxlength="50" />
+                        <span asp-validation-for="Cta14" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta15" class="control-label"></label>
+                        <input asp-for="Cta15" class="form-control" id="centrocosto_create_cta15" maxlength="50" />
+                        <span asp-validation-for="Cta15" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Cta16" class="control-label"></label>
+                        <input asp-for="Cta16" class="form-control" id="centrocosto_create_cta16" maxlength="50" />
+                        <span asp-validation-for="Cta16" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="centrocosto_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="centrocosto_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

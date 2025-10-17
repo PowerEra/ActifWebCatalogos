@@ -1,0 +1,70 @@
+@model ActifWebCRUD.Models.Piso
+
+@{
+    ViewData["Title"] = "Crear Piso";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Piso</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="piso_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdPiso" class="control-label"></label>
+                        <input asp-for="IdPiso" class="form-control" type="number" id="piso_create_id" />
+                        <span asp-validation-for="IdPiso" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" id="piso_create_descripcion" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="piso_create_compania">
+                            <option value="">-- Seleccione Compania --</option>
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdEdificio" class="control-label"></label>
+                        <input asp-for="IdEdificio" class="form-control" type="number" id="piso_create_edificio" />
+                        <span asp-validation-for="IdEdificio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdPisoAnterior" class="control-label"></label>
+                        <input asp-for="IdPisoAnterior" class="form-control" type="number" id="piso_create_pisoanterior" />
+                        <span asp-validation-for="IdPisoAnterior" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="piso_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="piso_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

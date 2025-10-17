@@ -1,0 +1,44 @@
+@model ActifWebCRUD.Models.UsuarioEdificio
+
+@{
+    ViewData["Title"] = "Eliminar Usuario Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Usuario Edificio</h1>
+
+    <div class="alert alert-danger">
+        <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    </div>
+
+    <div class="details-container">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdUsuarioEdificio)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.IdUsuarioEdificio)</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdUsuario)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.IdUsuario)</dd>
+
+            <dt class="col-sm-3">Usuario</dt>
+            <dd class="col-sm-9">@Model.UserName</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdCompania)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.IdCompania)</dd>
+
+            <dt class="col-sm-3">Compañía</dt>
+            <dd class="col-sm-9">@Model.Compania?.Nombre</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.IdEdificio)</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.IdEdificio)</dd>
+
+            <dt class="col-sm-3">Edificio</dt>
+            <dd class="col-sm-9">@Model.Edificio?.Descripcion</dd>
+        </dl>
+
+        <form asp-action="Delete" id="usuarioedificio_delete_form">
+            <input type="hidden" asp-for="IdUsuarioEdificio" />
+            <button type="submit" class="btn btn-danger" id="usuarioedificio_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="usuarioedificio_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+@model ActifWebCRUD.Models.TipoCalculo
+
+@{
+    ViewData["Title"] = "Eliminar Tipo de Cálculo";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle"></i>
+        ¿Está seguro que desea eliminar este registro?
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdTipoCalculo)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdTipoCalculo)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete" id="tipocalculo_eliminar_form">
+                <input type="hidden" asp-for="IdTipoCalculo" />
+                <button type="submit" class="btn btn-danger" id="tipocalculo_eliminar_confirmar">
+                    <i class="bi bi-trash"></i> Eliminar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary" id="tipocalculo_eliminar_cancelar">
+                    <i class="bi bi-x-circle"></i> Cancelar
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

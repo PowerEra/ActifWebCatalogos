@@ -1,0 +1,35 @@
+@model ActifWebCRUD.Models.GrupoSimulacion
+
+@{
+    ViewData["Title"] = "Eliminar Grupo Simulacion";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Grupo Simulacion</h1>
+
+    <div class="delete-confirmation">
+        <div class="delete-warning">
+            <h5>Advertencia</h5>
+            <p>Esta seguro que desea eliminar este grupo simulacion?</p>
+        </div>
+
+        <div class="delete-details">
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IdGrupoSimulacion)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IdGrupoSimulacion)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Descripcion)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Descripcion)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Nota)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Nota)</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" id="gruposimulacion_delete_form">
+            <input type="hidden" asp-for="IdGrupoSimulacion" />
+            <button type="submit" class="btn btn-danger" id="gruposimulacion_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="gruposimulacion_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

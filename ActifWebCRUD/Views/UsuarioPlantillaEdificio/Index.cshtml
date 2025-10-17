@@ -1,0 +1,93 @@
+@model IEnumerable<ActifWebCRUD.Models.VUsuarioPlantillaEdificio>
+
+@{
+    ViewData["Title"] = "Usuario Plantilla Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Usuario Plantilla Edificio</h1>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn-add-new" id="usuarioplantillaedificio_add_button">
+            <i class="fas fa-plus"></i> Agregar Nueva Asignación
+        </a>
+        <button onclick="exportToExcel()" class="btn-export-excel" id="usuarioplantillaedificio_export_button">
+            <i class="fas fa-file-excel"></i> Exportar a Excel
+        </button>
+    </div>
+
+    <table id="usuarioPlantillaEdificioTable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>ID Plantilla</th>
+                <th>Plantilla</th>
+                <th>Acciones</th>
+            </tr>
+            <tr>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar ID" /></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Usuario" /></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar ID Plantilla" /></th>
+                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Plantilla" /></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Idx</td>
+                    <td>@item.UserName</td>
+                    <td>@item.IdPlantilla</td>
+                    <td>@item.Plantilla</td>
+                    <td>
+                        <div class="action-icons">
+                            <a asp-action="Edit" asp-route-id="@item.Idx" class="action-icon icon-edit" title="Editar" id="usuarioplantillaedificio_edit_@item.Idx">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Idx" class="action-icon icon-delete" title="Eliminar" id="usuarioplantillaedificio_delete_@item.Idx">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#usuarioPlantillaEdificioTable').DataTable({
+                "pageLength": 50,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+                },
+                "order": [[0, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 4 }
+                ],
+                "initComplete": function () {
+                    // Apply the search
+                    this.api().columns().every(function (index) {
+                        if (index === 4) return; // Skip actions column
+
+                        var column = this;
+                        $('input', this.header()).on('keyup change clear', function () {
+                            if (column.search() !== this.value) {
+                                column.search(this.value).draw();
+                            }
+                        });
+                    });
+                }
+            });
+        });
+
+        function exportToExcel() {
+            window.location.href = '@Url.Action("ExportToExcel", "UsuarioPlantillaEdificio")';
+        }
+    </script>
+}

@@ -1,0 +1,74 @@
+@model ActifWebCRUD.Models.INPC2
+
+@{
+    ViewData["Title"] = "Crear INPC2";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Registro INPC2</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="inpc2_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Anio" class="control-label"></label>
+                        <input asp-for="Anio" class="form-control" type="number" id="inpc2_create_anio" />
+                        <span asp-validation-for="Anio" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Mes" class="control-label"></label>
+                        <input asp-for="Mes" class="form-control" type="number" min="1" max="12" id="inpc2_create_mes" />
+                        <span asp-validation-for="Mes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdGrupoSimulacion" class="control-label"></label>
+                        <select asp-for="IdGrupoSimulacion" class="form-control" asp-items="ViewBag.IdGrupoSimulacion" id="inpc2_create_idgruposimulacion">
+                            <option value="">-- Seleccione un grupo simulación --</option>
+                        </select>
+                        <span asp-validation-for="IdGrupoSimulacion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdPais" class="control-label"></label>
+                        <select asp-for="IdPais" class="form-control" asp-items="ViewBag.IdPais" id="inpc2_create_idpais">
+                            <option value="">-- Seleccione un país --</option>
+                        </select>
+                        <span asp-validation-for="IdPais" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Indice" class="control-label"></label>
+                        <input asp-for="Indice" class="form-control" type="number" step="0.000001" id="inpc2_create_indice" />
+                        <span asp-validation-for="Indice" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="inpc2_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="inpc2_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

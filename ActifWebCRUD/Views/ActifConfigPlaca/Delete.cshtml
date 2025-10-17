@@ -1,0 +1,58 @@
+@model ActifWebCRUD.Models.ActifConfigPlaca
+
+@{
+    ViewData["Title"] = "Eliminar Configuracion de Placa";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Configuracion de Placa</h1>
+
+    <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdConfigPlaca)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdConfigPlaca)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.Compania != null)
+                {
+                    @Html.DisplayFor(model => model.Compania.Nombre)
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IdCompania)
+                }
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Prefijo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Prefijo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.MinDigitos)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MinDigitos)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.MaxDigitos)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MaxDigitos)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="actifconfigplaca_delete_form">
+            <input type="hidden" asp-for="IdConfigPlaca" />
+            <button type="submit" class="btn btn-danger" id="actifconfigplaca_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="actifconfigplaca_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

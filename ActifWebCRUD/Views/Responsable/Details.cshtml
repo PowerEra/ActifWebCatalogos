@@ -1,0 +1,65 @@
+@model ActifWebCRUD.Models.Responsable
+
+@{
+    ViewData["Title"] = "Detalles del Responsable";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdResponsable)
+                </dt>
+                <dd class="col-sm-8" id="responsable_details_idresponsable">
+                    @Html.DisplayFor(model => model.IdResponsable)
+                </dd>
+
+                <dt class="col-sm-4">
+                    Compania
+                </dt>
+                <dd class="col-sm-8" id="responsable_details_compania">
+                    @(ViewBag.CompaniaNombre ?? "N/A")
+                </dd>
+
+                <dt class="col-sm-4">
+                    Centro de Costo
+                </dt>
+                <dd class="col-sm-8" id="responsable_details_centrocosto">
+                    @(ViewBag.CentroCostoNombre ?? "N/A")
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-8" id="responsable_details_nombre">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.PuestoResponsable)
+                </dt>
+                <dd class="col-sm-8" id="responsable_details_puesto">
+                    @Html.DisplayFor(model => model.PuestoResponsable)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.NumeroEmpleado)
+                </dt>
+                <dd class="col-sm-8" id="responsable_details_numeroempleado">
+                    @Html.DisplayFor(model => model.NumeroEmpleado)
+                </dd>
+            </dl>
+
+            <div class="mt-3">
+                <a asp-action="Edit" asp-route-id="@Model.IdResponsable" class="btn btn-warning" id="responsable_details_editar">Editar</a>
+                <a asp-action="Index" class="btn btn-secondary" id="responsable_details_volver">Volver al Listado</a>
+            </div>
+        </div>
+    </div>
+</div>

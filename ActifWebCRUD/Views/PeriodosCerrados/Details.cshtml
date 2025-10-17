@@ -1,0 +1,81 @@
+@model ActifWebCRUD.Models.PeriodosCerrados
+
+@{
+    ViewData["Title"] = "Detalles Periodo Cerrado";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles Periodo Cerrado</h1>
+
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCierreCompania)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_idcierrecompania">
+                @Html.DisplayFor(model => model.IdCierreCompania)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Anio)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_anio">
+                @Html.DisplayFor(model => model.Anio)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Mes)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_mes">
+                @Html.DisplayFor(model => model.Mes)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_idcompania">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+
+            <dt class="col-sm-3">
+                Nombre Compania
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_nombrecompania">
+                @Html.DisplayFor(model => model.Compania.Nombre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaCierre)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_fechacierre">
+                @Html.DisplayFor(model => model.FechaCierre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdUsuarioCierre)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_idusuariocierre">
+                @Html.DisplayFor(model => model.IdUsuarioCierre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdTipoDep)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_idtipodep">
+                @Html.DisplayFor(model => model.IdTipoDep)
+            </dd>
+
+            <dt class="col-sm-3">
+                Descripcion Tipo Depreciacion
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_details_desctipodep">
+                @Html.DisplayFor(model => model.TipoDepreciacion.Descripcion)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.IdCierreCompania" class="btn btn-primary" id="periodoscerrados_details_edit">Editar</a>
+        <a asp-action="Index" class="btn btn-secondary" id="periodoscerrados_details_back">Volver al Listado</a>
+    </div>
+</div>

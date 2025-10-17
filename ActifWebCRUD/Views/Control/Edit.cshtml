@@ -1,0 +1,65 @@
+@model ActifWebCRUD.Models.Control
+
+@{
+    ViewData["Title"] = "Editar Control";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Control</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Edit" id="control_edit_form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="IdControl" id="control_edit_idcontrol" />
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label"></label>
+                    <input asp-for="Titulo" class="form-control" id="control_edit_titulo" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Contenido" class="form-label"></label>
+                    <textarea asp-for="Contenido" class="form-control" id="control_edit_contenido" rows="3"></textarea>
+                    <span asp-validation-for="Contenido" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FlgUsar" class="form-label"></label>
+                    <input asp-for="FlgUsar" class="form-control" id="control_edit_flgusar" maxlength="2" />
+                    <span asp-validation-for="FlgUsar" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Tipo" class="form-label"></label>
+                    <input asp-for="Tipo" class="form-control" id="control_edit_tipo" maxlength="2" />
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Longitud" class="form-label"></label>
+                    <input asp-for="Longitud" class="form-control" id="control_edit_longitud" type="number" />
+                    <span asp-validation-for="Longitud" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Decimales" class="form-label"></label>
+                    <input asp-for="Decimales" class="form-control" id="control_edit_decimales" type="number" />
+                    <span asp-validation-for="Decimales" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary" id="control_edit_submit">Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary" id="control_edit_cancel">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

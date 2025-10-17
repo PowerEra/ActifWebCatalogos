@@ -1,0 +1,54 @@
+@model ActifWebCRUD.Models.ActifTipoDepEdificio
+
+@{
+    ViewData["Title"] = "Detalles Tipo Depreciación por Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles Tipo Depreciación por Edificio</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Idx)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Idx)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdTipoDep)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdTipoDep)
+            </dd>
+            <dt class="col-sm-3">
+                Descripción Tipo Depreciación
+            </dt>
+            <dd class="col-sm-9">
+                @Model.TipoDepreciacion?.Descripcion
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificio)
+            </dd>
+            <dt class="col-sm-3">
+                Descripción Edificio
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Edificio?.Descripcion
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaCaptura)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.FechaCaptura?.ToString("yyyy-MM-dd HH:mm:ss"))
+            </dd>
+        </dl>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Idx" class="btn btn-primary">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+@model ActifWebCRUD.Models.PeriodosCerrados
+
+@{
+    ViewData["Title"] = "Eliminar Periodo Cerrado";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Periodo Cerrado</h1>
+
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCierreCompania)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_idcierrecompania">
+                @Html.DisplayFor(model => model.IdCierreCompania)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Anio)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_anio">
+                @Html.DisplayFor(model => model.Anio)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Mes)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_mes">
+                @Html.DisplayFor(model => model.Mes)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_idcompania">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+
+            <dt class="col-sm-3">
+                Nombre Compania
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_nombrecompania">
+                @Html.DisplayFor(model => model.Compania.Nombre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FechaCierre)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_fechacierre">
+                @Html.DisplayFor(model => model.FechaCierre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdUsuarioCierre)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_idusuariocierre">
+                @Html.DisplayFor(model => model.IdUsuarioCierre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdTipoDep)
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_idtipodep">
+                @Html.DisplayFor(model => model.IdTipoDep)
+            </dd>
+
+            <dt class="col-sm-3">
+                Descripcion Tipo Depreciacion
+            </dt>
+            <dd class="col-sm-9" id="periodoscerrados_delete_display_desctipodep">
+                @Html.DisplayFor(model => model.TipoDepreciacion.Descripcion)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="periodoscerrados_delete_form">
+            <input type="hidden" asp-for="IdCierreCompania" />
+            <input type="submit" value="Eliminar" class="btn btn-danger" id="periodoscerrados_delete_submit" />
+            <a asp-action="Index" class="btn btn-secondary" id="periodoscerrados_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

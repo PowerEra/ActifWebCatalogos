@@ -1,0 +1,557 @@
+using Microsoft.EntityFrameworkCore;
+using ActifWebCRUD.Models;
+
+namespace ActifWebCRUD.Data
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Compania> Compania { get; set; }
+        public DbSet<TipoDepreciacion> TipoDepreciacion { get; set; }
+        public DbSet<TipoActivo> TipoActivo { get; set; }
+        public DbSet<SubtipoActivo> SubtipoActivo { get; set; }
+        public DbSet<EstadoActivo> EstadoActivo { get; set; }
+        public DbSet<TipoMovimiento> TipoMovimiento { get; set; }
+        public DbSet<SubtipoMovimiento> SubtipoMovimiento { get; set; }
+        public DbSet<Pais> Pais { get; set; }
+        public DbSet<Estado> Estado { get; set; }
+        public DbSet<VEstado> VEstado { get; set; }
+        public DbSet<Moneda> Moneda { get; set; }
+        public DbSet<ClaseTipoCambio> ClaseTipoCambio { get; set; }
+        public DbSet<Area> Area { get; set; }
+        public DbSet<Responsable> Responsable { get; set; }
+        public DbSet<VResponsable> VResponsable { get; set; }
+        public DbSet<CentroCosto> CentroCosto { get; set; }
+        public DbSet<VCentroCosto> VCentroCosto { get; set; }
+        public DbSet<GrupoSimulacion> GrupoSimulacion { get; set; }
+        public DbSet<Control> Control { get; set; }
+        public DbSet<SignificadoId> SignificadoId { get; set; }
+        public DbSet<Edificio> Edificio { get; set; }
+        public DbSet<VEdificio> VEdificio { get; set; }
+        public DbSet<ConceptoContable> ConceptoContable { get; set; }
+        public DbSet<VConceptoContable> VConceptoContable { get; set; }
+        public DbSet<Piso> Piso { get; set; }
+        public DbSet<PeriodosCerrados> PeriodosCerrados { get; set; }
+        public DbSet<TipoCalculo> TipoCalculo { get; set; }
+        public DbSet<GrupoEdificio> GrupoEdificio { get; set; }
+        public DbSet<EdificioPiso> EdificioPiso { get; set; }
+        public DbSet<PlantillaEdificio> PlantillaEdificio { get; set; }
+        public DbSet<PlantillaEdificioDetalle> PlantillaEdificioDetalle { get; set; }
+        public DbSet<EdificioCentroCosto> EdificioCentroCosto { get; set; }
+        public DbSet<ActifConfigPlaca> ActifConfigPlaca { get; set; }
+        public DbSet<INPC2> INPC2 { get; set; }
+        public DbSet<GrupoEdificioDetalle> GrupoEdificioDetalle { get; set; }
+        public DbSet<ActifCompaniaTipoDepreciacion> ActifCompaniaTipoDepreciacion { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configure Compania entity
+            modelBuilder.Entity<Compania>(entity =>
+            {
+                entity.ToTable("compania");
+                entity.HasKey(e => e.IdCompania);
+            });
+
+            // Configure TipoDepreciacion entity
+            modelBuilder.Entity<TipoDepreciacion>(entity =>
+            {
+                entity.ToTable("tipo_depreciacion");
+                entity.HasKey(e => e.IdTipoDep);
+            });
+
+            // Configure TipoActivo entity
+            modelBuilder.Entity<TipoActivo>(entity =>
+            {
+                entity.ToTable("tipo_activo");
+                entity.HasKey(e => e.IdTipoActivo);
+
+                // Configure ID_TIPO_ACTIVO to not be auto-generated
+                entity.Property(e => e.IdTipoActivo)
+                    .ValueGeneratedNever();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Configure foreign key relationship
+                entity.HasOne(e => e.Compania)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdCompania)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure SubtipoActivo entity
+            modelBuilder.Entity<SubtipoActivo>(entity =>
+            {
+                entity.ToTable("subtipo_activo");
+                entity.HasKey(e => e.IdSubtipoActivo);
+
+                // Configure ID_SUBTIPO_ACTIVO to not be auto-generated (IsIdentity = 0)
+                entity.Property(e => e.IdSubtipoActivo)
+                    .ValueGeneratedNever();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Configure foreign key relationship
+                entity.HasOne(e => e.TipoActivo)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdTipoActivo)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure EstadoActivo entity
+            modelBuilder.Entity<EstadoActivo>(entity =>
+            {
+                entity.ToTable("estado_activo");
+                entity.HasKey(e => e.IdEstadoActivo);
+
+                // Configure ID_ESTADO_ACTIVO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdEstadoActivo)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure TipoMovimiento entity
+            modelBuilder.Entity<TipoMovimiento>(entity =>
+            {
+                entity.ToTable("tipo_movimiento");
+                entity.HasKey(e => e.IdTipoMov);
+
+                // Configure ID_TIPO_MOV as IDENTITY (auto-generated)
+                entity.Property(e => e.IdTipoMov)
+                    .ValueGeneratedOnAdd();
+            });
+
+            // Configure SubtipoMovimiento entity
+            modelBuilder.Entity<SubtipoMovimiento>(entity =>
+            {
+                entity.ToTable("subtipo_movimiento");
+                entity.HasKey(e => e.IdSubtipoMov);
+
+                // Configure ID_SUBTIPO_MOV as IDENTITY (auto-generated)
+                entity.Property(e => e.IdSubtipoMov)
+                    .ValueGeneratedOnAdd();
+
+                // Configure foreign key relationship
+                entity.HasOne(e => e.TipoMovimiento)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdTipoMov)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure Pais entity
+            modelBuilder.Entity<Pais>(entity =>
+            {
+                entity.ToTable("pais");
+                entity.HasKey(e => e.IdPais);
+
+                // Configure ID_PAIS as IDENTITY (auto-generated)
+                entity.Property(e => e.IdPais)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure Estado entity
+            modelBuilder.Entity<Estado>(entity =>
+            {
+                entity.ToTable("estado");
+                entity.HasKey(e => e.IdEstado);
+
+                // Configure ID_ESTADO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdEstado)
+                    .ValueGeneratedOnAdd();
+
+                // Note: FK relationship to Pais not configured due to type mismatch
+                // (estado.ID_PAIS is smallint, pais.ID_PAIS is int)
+                // Navigation property will be loaded manually in controller
+            });
+
+            // Configure VEstado view
+            modelBuilder.Entity<VEstado>(entity =>
+            {
+                entity.ToView("vEstado");
+                entity.HasKey(e => e.IdEstado);
+            });
+
+            // Configure Moneda entity
+            modelBuilder.Entity<Moneda>(entity =>
+            {
+                entity.ToTable("moneda");
+                entity.HasKey(e => e.IdMoneda);
+
+                // Configure ID_MONEDA as IDENTITY (auto-generated)
+                entity.Property(e => e.IdMoneda)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Configure foreign key relationship
+                entity.HasOne(e => e.Pais)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdPais)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure ClaseTipoCambio entity
+            modelBuilder.Entity<ClaseTipoCambio>(entity =>
+            {
+                entity.ToTable("clase_tipo_cambio");
+                entity.HasKey(e => e.IdClaseTipCam);
+
+                // Configure ID_CLASE_TIPCAM to not be auto-generated (IsIdentity = 0)
+                entity.Property(e => e.IdClaseTipCam)
+                    .ValueGeneratedNever();
+            });
+
+            // Configure Area entity
+            modelBuilder.Entity<Area>(entity =>
+            {
+                entity.ToTable("area");
+                entity.HasKey(e => e.IdArea);
+
+                // Configure ID_AREA as IDENTITY (auto-generated)
+                entity.Property(e => e.IdArea)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure Responsable entity
+            modelBuilder.Entity<Responsable>(entity =>
+            {
+                entity.ToTable("responsable");
+                entity.HasKey(e => e.IdResponsable);
+
+                // Configure ID_RESPONSABLE as IDENTITY (auto-generated)
+                entity.Property(e => e.IdResponsable)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure VResponsable view
+            modelBuilder.Entity<VResponsable>(entity =>
+            {
+                entity.ToView("vResponsable");
+                entity.HasKey(e => e.IdResponsable);
+            });
+
+            // Configure CentroCosto entity
+            modelBuilder.Entity<CentroCosto>(entity =>
+            {
+                entity.ToTable("centro_costo");
+                entity.HasKey(e => e.IdCentroCosto);
+
+                // Configure ID_CENTRO_COSTO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdCentroCosto)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Configure foreign key relationship
+                entity.HasOne(e => e.Compania)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdCompania)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure VCentroCosto view
+            modelBuilder.Entity<VCentroCosto>(entity =>
+            {
+                entity.ToView("vCentro_Costo");
+                entity.HasKey(e => e.IdCentroCosto);
+            });
+
+            // Configure GrupoSimulacion entity
+            modelBuilder.Entity<GrupoSimulacion>(entity =>
+            {
+                entity.ToTable("grupo_simulacion");
+                entity.HasKey(e => e.IdGrupoSimulacion);
+
+                // Configure ID_GRUPO_SIMULACION as IDENTITY (auto-generated)
+                entity.Property(e => e.IdGrupoSimulacion)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure SignificadoId entity
+            modelBuilder.Entity<SignificadoId>(entity =>
+            {
+                entity.ToTable("significado_id");
+                entity.HasKey(e => e.IdSignificadoId);
+
+                // Configure ID_SIGNIFICADO_ID as IDENTITY (auto-generated)
+                entity.Property(e => e.IdSignificadoId)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure Edificio entity
+            modelBuilder.Entity<Edificio>(entity =>
+            {
+                entity.ToTable("edificio");
+                entity.HasKey(e => e.IdEdificio);
+
+                // Configure ID_EDIFICIO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdEdificio)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Note: FK relationships not configured, navigation properties loaded manually
+            });
+
+            // Configure VEdificio view
+            modelBuilder.Entity<VEdificio>(entity =>
+            {
+                entity.ToView("vEdificio");
+                entity.HasKey(e => e.IdEdificio);
+            });
+
+            // Configure Control entity
+            modelBuilder.Entity<Control>(entity =>
+            {
+                entity.ToTable("control");
+                entity.HasKey(e => e.IdControl);
+
+                // Configure ID_CONTROL as IDENTITY (auto-generated)
+                entity.Property(e => e.IdControl)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+            });
+
+            // Configure ConceptoContable entity
+            modelBuilder.Entity<ConceptoContable>(entity =>
+            {
+                entity.ToTable("concepto_contable");
+                entity.HasKey(e => e.IdConcepto);
+
+                // Configure ID_CONCEPTO to not be auto-generated
+                entity.Property(e => e.IdConcepto)
+                    .ValueGeneratedNever();
+
+                // Configure foreign key relationships
+                entity.HasOne(e => e.Compania)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdCompania)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.TipoActivo)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdTipoActivo)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.SubtipoActivo)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdSubtipoActivo)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure VConceptoContable view
+            modelBuilder.Entity<VConceptoContable>(entity =>
+            {
+                entity.ToView("vConcepto_contable");
+                entity.HasKey(e => e.IdConcepto);
+            });
+
+            // Configure Piso entity
+            modelBuilder.Entity<Piso>(entity =>
+            {
+                entity.ToTable("piso");
+                entity.HasKey(e => e.IdPiso);
+
+                // Configure ID_PISO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdPiso)
+                    .ValueGeneratedOnAdd();
+
+                // Configure rv as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Note: FK relationship to Compania not configured due to type mismatch
+                // (piso.ID_COMPANIA is int?, compania.ID_COMPANIA is short)
+                // Navigation property will be loaded manually in controller
+            });
+
+            // Configure PeriodosCerrados entity
+            modelBuilder.Entity<PeriodosCerrados>(entity =>
+            {
+                entity.ToTable("PeriodosCerrados");
+                entity.HasKey(e => e.IdCierreCompania);
+
+                // Configure Id_Cierre_Compania as IDENTITY (auto-generated)
+                entity.Property(e => e.IdCierreCompania)
+                    .ValueGeneratedOnAdd();
+
+                // Configure foreign key relationship to Compania
+                entity.HasOne(e => e.Compania)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdCompania)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Configure foreign key relationship to TipoDepreciacion
+                entity.HasOne(e => e.TipoDepreciacion)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdTipoDep)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // Configure TipoCalculo entity
+            modelBuilder.Entity<TipoCalculo>(entity =>
+            {
+                entity.ToTable("TiposCalculo");
+                entity.HasKey(e => e.IdTipoCalculo);
+
+                // Configure ID_TIPO_CALCULO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdTipoCalculo)
+                    .ValueGeneratedOnAdd();
+
+            });
+            // Configure GrupoEdificio entity
+            modelBuilder.Entity<GrupoEdificio>(entity =>
+            {
+                entity.ToTable("grupoEdificio");
+                entity.HasKey(e => e.IdGrupo);
+
+                // Configure IdGrupo as IDENTITY (auto-generated)
+                entity.Property(e => e.IdGrupo)
+                    .ValueGeneratedOnAdd();
+            });
+
+            // Configure EdificioPiso entity
+            modelBuilder.Entity<EdificioPiso>(entity =>
+            {
+                entity.ToTable("edificio_piso");
+                entity.HasKey(e => new { e.IdCompania, e.IdEdificio, e.IdPiso });
+
+                // Configure composite key properties to not be auto-generated
+                entity.Property(e => e.IdCompania)
+                    .ValueGeneratedNever();
+                entity.Property(e => e.IdEdificio)
+                    .ValueGeneratedNever();
+                entity.Property(e => e.IdPiso)
+                    .ValueGeneratedNever();
+
+                // Note: FK relationships not configured, navigation properties loaded manually
+            });
+
+            // Configure PlantillaEdificio entity
+            modelBuilder.Entity<PlantillaEdificio>(entity =>
+            {
+                entity.ToTable("PlantillaEdificio");
+                entity.HasKey(e => e.IdPlantilla);
+
+                // Configure IdPlantilla as IDENTITY (auto-generated)
+                entity.Property(e => e.IdPlantilla)
+                    .ValueGeneratedOnAdd();
+
+                // Note: FK relationships not configured, navigation properties loaded manually
+            });
+
+            // Configure PlantillaEdificioDetalle entity
+            modelBuilder.Entity<PlantillaEdificioDetalle>(entity =>
+            {
+                entity.ToTable("plantillaedificiodetalle");
+                entity.HasKey(e => e.IdPlantillaDetalle);
+
+                // Configure IdPlantillaDetalle as IDENTITY (auto-generated)
+                entity.Property(e => e.IdPlantillaDetalle)
+                    .ValueGeneratedOnAdd();
+
+                // Note: FK relationships not configured, navigation properties loaded manually
+            });
+
+            // Configure EdificioCentroCosto entity
+            modelBuilder.Entity<EdificioCentroCosto>(entity =>
+            {
+                entity.ToTable("edificio_centro_costo");
+                entity.HasKey(e => e.IdEdificioCentroCosto);
+
+                // Configure ID_EDIFICIO_CENTRO_COSTO as IDENTITY (auto-generated)
+                entity.Property(e => e.IdEdificioCentroCosto)
+                    .ValueGeneratedOnAdd();
+
+                // Note: FK relationships not configured, navigation properties loaded manually
+            });
+
+            // Configure ActifConfigPlaca entity
+            modelBuilder.Entity<ActifConfigPlaca>(entity =>
+            {
+                entity.ToTable("actif_config_placa");
+                entity.HasKey(e => e.IdConfigPlaca);
+
+                // Configure ID_CONFIG_PLACA as IDENTITY (auto-generated)
+                entity.Property(e => e.IdConfigPlaca)
+                    .ValueGeneratedOnAdd();
+
+                // Configure RV as timestamp (rowversion)
+                entity.Property(e => e.Rv)
+                    .IsRowVersion()
+                    .ValueGeneratedOnAddOrUpdate();
+
+                // Note: FK relationship to Compania not configured due to type mismatch
+                // (actif_config_placa.ID_COMPANIA is int, compania.ID_COMPANIA is short)
+                // Navigation property will be loaded manually in controller
+            });
+
+            // Configure GrupoEdificioDetalle entity
+            modelBuilder.Entity<GrupoEdificioDetalle>(entity =>
+            {
+                entity.ToTable("grupoEdificioDetalle");
+                entity.HasKey(e => e.IdGE);
+
+                // Configure IdGE as IDENTITY (auto-generated)
+                entity.Property(e => e.IdGE)
+                    .ValueGeneratedOnAdd();
+
+                // Note: FK relationships not configured, navigation properties loaded manually
+            });
+        }
+    }
+}

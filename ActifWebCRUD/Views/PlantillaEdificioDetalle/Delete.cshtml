@@ -1,0 +1,33 @@
+@model ActifWebCRUD.Models.PlantillaEdificioDetalle
+
+@{
+    ViewData["Title"] = "Eliminar Plantilla Edificio Detalle";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Plantilla Edificio Detalle</h1>
+
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">ID Detalle</dt>
+            <dd class="col-sm-9">@Model.IdPlantillaDetalle</dd>
+
+            <dt class="col-sm-3">Plantilla</dt>
+            <dd class="col-sm-9">@(Model.PlantillaEdificio?.Plantilla ?? "")</dd>
+
+            <dt class="col-sm-3">ID Edificio</dt>
+            <dd class="col-sm-9">@Model.IdEdificio</dd>
+
+            <dt class="col-sm-3">Compania</dt>
+            <dd class="col-sm-9">@(Model.Compania?.Nombre ?? "")</dd>
+        </dl>
+        
+        <form asp-action="Delete" id="plantillaedificiodetalle_delete_form">
+            <input type="hidden" asp-for="IdPlantillaDetalle" />
+            <button type="submit" class="btn btn-danger" id="plantillaedificiodetalle_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="plantillaedificiodetalle_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

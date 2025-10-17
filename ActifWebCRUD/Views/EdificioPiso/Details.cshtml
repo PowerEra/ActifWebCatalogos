@@ -1,0 +1,49 @@
+@model ActifWebCRUD.Models.EdificioPiso
+
+@{
+    ViewData["Title"] = "Detalles Edificio Piso";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles de Relación Edificio-Piso</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdCompania)
+            </dd>
+            <dt class="col-sm-3">
+                Nombre Compañía
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Compania?.Nombre
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdPiso)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdPiso)
+            </dd>
+            <dt class="col-sm-3">
+                Descripción Piso
+            </dt>
+            <dd class="col-sm-9">
+                @Model.Piso?.Descripcion
+            </dd>
+        </dl>
+
+        <div>
+            <a asp-action="Edit" asp-route-idCompania="@Model.IdCompania" asp-route-idEdificio="@Model.IdEdificio" asp-route-idPiso="@Model.IdPiso" class="btn btn-primary" id="edificiopiso_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="edificiopiso_details_back">Volver al Listado</a>
+        </div>
+    </div>
+</div>

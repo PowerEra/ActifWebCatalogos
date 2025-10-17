@@ -1,0 +1,61 @@
+@model ActifWebCRUD.Models.ActifUsuariosAutorizadores
+
+@{
+    ViewData["Title"] = "Crear Usuario Autorizador";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nuevo Usuario Autorizador</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="actifusuariosautorizadores_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdUsuario" class="control-label">Usuario</label>
+                        <select asp-for="IdUsuario" class="form-control" asp-items="ViewBag.IdUsuario" id="actifusuariosautorizadores_create_usuario">
+                            <option value="">-- Seleccione Usuario --</option>
+                        </select>
+                        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label">Compañía</label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="actifusuariosautorizadores_create_compania">
+                            <option value="">-- Seleccione Compañía --</option>
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdEdificio" class="control-label">Edificio</label>
+                        <select name="IdEdificio" id="actifusuariosautorizadores_create_edificio" class="form-control">
+                            <option value="">-- Seleccione Edificio --</option>
+                            @foreach (var item in (List<SelectListItem>)ViewData["IdEdificio"])
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdEdificio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="actifusuariosautorizadores_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="actifusuariosautorizadores_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

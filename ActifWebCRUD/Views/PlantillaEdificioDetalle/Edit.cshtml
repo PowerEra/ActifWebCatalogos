@@ -1,0 +1,51 @@
+@model ActifWebCRUD.Models.PlantillaEdificioDetalle
+
+@{
+    ViewData["Title"] = "Editar Plantilla Edificio Detalle";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Plantilla Edificio Detalle</h1>
+
+    <form asp-action="Edit" id="plantillaedificiodetalle_edit_form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdPlantillaDetalle" />
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="IdPlantilla" class="form-label">Plantilla</label>
+                <select asp-for="IdPlantilla" class="form-select" asp-items="ViewBag.IdPlantilla" id="plantillaedificiodetalle_edit_idplantilla">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="IdPlantilla" class="text-danger"></span>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <label asp-for="IdEdificio" class="form-label">Edificio</label>
+                <select asp-for="IdEdificio" class="form-select" asp-items="ViewBag.IdEdificio" id="plantillaedificiodetalle_edit_idedificio">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="IdEdificio" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="IdCompania" class="form-label">Compania</label>
+                <select asp-for="IdCompania" class="form-select" asp-items="ViewBag.IdCompania" id="plantillaedificiodetalle_edit_idcompania">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="IdCompania" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="plantillaedificiodetalle_edit_submit">Guardar Cambios</button>
+            <a asp-action="Index" class="btn btn-secondary" id="plantillaedificiodetalle_edit_cancel">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,39 @@
+@model ActifWebCRUD.Models.ActifUsuariosAutorizadores
+
+@{
+    ViewData["Title"] = "Detalles Usuario Autorizador";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles Usuario Autorizador</h1>
+
+    <div class="details-container">
+        <dl class="row">
+            <dt class="col-sm-3">ID Autorizador</dt>
+            <dd class="col-sm-9">@Model.IdUsuarioAutorizador</dd>
+
+            <dt class="col-sm-3">ID Usuario</dt>
+            <dd class="col-sm-9">@Model.IdUsuario</dd>
+
+            <dt class="col-sm-3">Usuario</dt>
+            <dd class="col-sm-9">@Model.UserName</dd>
+
+            <dt class="col-sm-3">ID Compañía</dt>
+            <dd class="col-sm-9">@Model.IdCompania</dd>
+
+            <dt class="col-sm-3">Compañía</dt>
+            <dd class="col-sm-9">@Model.CompaniaName</dd>
+
+            <dt class="col-sm-3">ID Edificio</dt>
+            <dd class="col-sm-9">@Model.IdEdificio</dd>
+
+            <dt class="col-sm-3">Edificio</dt>
+            <dd class="col-sm-9">@Model.EdificioDesc</dd>
+        </dl>
+
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.IdUsuarioAutorizador" class="btn btn-primary" id="actifusuariosautorizadores_details_edit">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary" id="actifusuariosautorizadores_details_back">Volver al Listado</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+@model ActifWebCRUD.Models.Responsable
+
+@{
+    ViewData["Title"] = "Eliminar Responsable";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="alert alert-warning" role="alert">
+        <h4>¿Está seguro de que desea eliminar este responsable?</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.IdResponsable)
+                </dt>
+                <dd class="col-sm-8" id="responsable_delete_idresponsable">
+                    @Html.DisplayFor(model => model.IdResponsable)
+                </dd>
+
+                <dt class="col-sm-4">
+                    Compania
+                </dt>
+                <dd class="col-sm-8" id="responsable_delete_compania">
+                    @(ViewBag.CompaniaNombre ?? "N/A")
+                </dd>
+
+                <dt class="col-sm-4">
+                    Centro de Costo
+                </dt>
+                <dd class="col-sm-8" id="responsable_delete_centrocosto">
+                    @(ViewBag.CentroCostoNombre ?? "N/A")
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-8" id="responsable_delete_nombre">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.PuestoResponsable)
+                </dt>
+                <dd class="col-sm-8" id="responsable_delete_puesto">
+                    @Html.DisplayFor(model => model.PuestoResponsable)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.NumeroEmpleado)
+                </dt>
+                <dd class="col-sm-8" id="responsable_delete_numeroempleado">
+                    @Html.DisplayFor(model => model.NumeroEmpleado)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete" id="responsable_delete_form">
+                <input type="hidden" asp-for="IdResponsable" />
+                <button type="submit" class="btn btn-danger" id="responsable_delete_confirmar">Eliminar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="responsable_delete_cancelar">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>

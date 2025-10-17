@@ -1,0 +1,64 @@
+@model ActifWebCRUD.Models.EdificioPiso
+
+@{
+    ViewData["Title"] = "Editar Edificio Piso";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Relación Edificio-Piso</h1>
+
+    <div class="form-container">
+        <form asp-action="Edit" id="edificiopiso_edit_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCompania" />
+            <input type="hidden" asp-for="IdEdificio" />
+            <input type="hidden" asp-for="IdPiso" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" disabled id="edificiopiso_edit_compania">
+                            <option value="">-- Seleccione Compañía --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdEdificio" class="control-label"></label>
+                        <select name="IdEdificio" id="edificiopiso_edit_edificio" class="form-control" disabled>
+                            <option value="">-- Seleccione Edificio --</option>
+                            @foreach (var item in (List<SelectListItem>)ViewData["IdEdificio"])
+                            {
+                                <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdPiso" class="control-label"></label>
+                        <select asp-for="IdPiso" class="form-control" asp-items="ViewBag.IdPiso" disabled id="edificiopiso_edit_piso">
+                            <option value="">-- Seleccione Piso --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-3">
+                <strong>Nota:</strong> Los campos de clave compuesta no pueden ser modificados. Para cambiar estos valores, elimine este registro y cree uno nuevo.
+            </div>
+
+            <div class="form-group mt-3">
+                <a asp-action="Index" class="btn btn-secondary" id="edificiopiso_edit_cancel">Volver al Listado</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

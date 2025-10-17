@@ -1,0 +1,94 @@
+@model ActifWebCRUD.Models.Edificio
+
+@{
+    ViewData["Title"] = "Eliminar Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Edificio</h1>
+
+    <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEdificio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Compania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Compania!.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CalleNumero)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CalleNumero)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Colonia)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Colonia)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.DelegMpio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.DelegMpio)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Ciudad)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Ciudad)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CodigoPostal)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CodigoPostal)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.Estado != null)
+                {
+                    @Html.DisplayFor(model => model.Estado!.Nombre)
+                }
+                else
+                {
+                    <text>N/A</text>
+                }
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Inactivo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Inactivo)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="edificio_delete_form">
+            <input type="hidden" asp-for="IdEdificio" />
+            <button type="submit" class="btn btn-danger" id="edificio_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="edificio_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

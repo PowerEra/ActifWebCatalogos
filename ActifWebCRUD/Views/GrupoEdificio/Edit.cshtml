@@ -1,0 +1,35 @@
+@model ActifWebCRUD.Models.GrupoEdificio
+
+@{
+    ViewData["Title"] = "Editar Grupo Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Grupo Edificio</h1>
+
+    <div class="form-container">
+        <form asp-action="Edit" id="grupoedificio_edit_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdGrupo" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Grupo" class="control-label"></label>
+                        <input asp-for="Grupo" class="form-control" id="grupoedificio_edit_grupo" maxlength="20" />
+                        <span asp-validation-for="Grupo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="grupoedificio_edit_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="grupoedificio_edit_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

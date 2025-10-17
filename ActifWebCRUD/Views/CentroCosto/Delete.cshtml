@@ -1,0 +1,57 @@
+@model ActifWebCRUD.Models.CentroCosto
+
+@{
+    ViewData["Title"] = "Eliminar Centro de Costo";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Centro de Costo</h1>
+
+    <h3>¿Está seguro de que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCentroCosto)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdCentroCosto)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Compania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Compania!.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Codigo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Codigo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Responsable)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Responsable)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="centrocosto_delete_form">
+            <input type="hidden" asp-for="IdCentroCosto" />
+            <button type="submit" class="btn btn-danger" id="centrocosto_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="centrocosto_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

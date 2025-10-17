@@ -1,0 +1,34 @@
+@model ActifWebCRUD.Models.EstadoActivo
+
+@{
+    ViewData["Title"] = "Eliminar Estado de Activo";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Estado de Activo</h1>
+
+    <h3>Esta seguro que desea eliminar este registro?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdEstadoActivo)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdEstadoActivo)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="estadoactivo_delete_form">
+            <input type="hidden" asp-for="IdEstadoActivo" />
+            <button type="submit" class="btn btn-danger" id="estadoactivo_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="estadoactivo_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

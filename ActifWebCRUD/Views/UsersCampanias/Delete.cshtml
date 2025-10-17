@@ -1,0 +1,53 @@
+@model ActifWebCRUD.Models.UsersCampanias
+
+@{
+    ViewData["Title"] = "Eliminar Usuario Compania";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Relacion Usuario-Compania</h1>
+
+    <h3>¿Esta seguro de que desea eliminar este registro?</h3>
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdUserCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdUserCompania)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdUser)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.User != null)
+                {
+                    @Html.DisplayFor(model => model.User.UserName)
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IdUser)
+                }
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdCompania)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.Compania != null)
+                {
+                    @Html.DisplayFor(model => model.Compania.Nombre)
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.IdCompania)
+                }
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" id="userscampanias_delete_form">
+            <input type="hidden" asp-for="IdUserCompania" />
+            <button type="submit" class="btn btn-danger" id="userscampanias_delete_submit">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="userscampanias_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

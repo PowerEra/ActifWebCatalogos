@@ -1,0 +1,69 @@
+@model ActifWebCRUD.Models.PlantillaEdificio
+
+@{
+    ViewData["Title"] = "Detalles Plantilla Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Detalles de Plantilla Edificio</h1>
+
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IdPlantilla)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IdPlantilla)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Plantilla)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Plantilla)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TipoDepreciacion)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.TipoDepreciacion != null)
+                {
+                    @Html.DisplayFor(model => model.TipoDepreciacion!.Descripcion)
+                }
+                else
+                {
+                    <text>N/A</text>
+                }
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TomaEdificio)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.TomaEdificio.HasValue ? (Model.TomaEdificio.Value ? "Sí" : "No") : "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TomaCC)
+            </dt>
+            <dd class="col-sm-9">
+                @(Model.TomaCC.HasValue ? (Model.TomaCC.Value ? "Sí" : "No") : "N/A")
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Compania)
+            </dt>
+            <dd class="col-sm-9">
+                @if (Model.Compania != null)
+                {
+                    @Html.DisplayFor(model => model.Compania!.Nombre)
+                }
+                else
+                {
+                    <text>N/A</text>
+                }
+            </dd>
+        </dl>
+
+        <div class="form-group mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.IdPlantilla" class="btn btn-primary">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+        </div>
+    </div>
+</div>

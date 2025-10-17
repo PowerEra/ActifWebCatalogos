@@ -1,0 +1,49 @@
+@model ActifWebCRUD.Models.Moneda
+
+@{
+    ViewData["Title"] = "Crear Moneda";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" id="moneda_create_form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdPais" class="control-label"></label>
+                    <select asp-for="IdPais" class="form-control" asp-items="ViewBag.IdPais" id="moneda_create_idpais">
+                        <option value="">-- Seleccione un país --</option>
+                    </select>
+                    <span asp-validation-for="IdPais" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" id="moneda_create_nombre" maxlength="20" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Simbolo" class="control-label"></label>
+                    <input asp-for="Simbolo" class="form-control" id="moneda_create_simbolo" maxlength="4" />
+                    <span asp-validation-for="Simbolo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary" id="moneda_create_guardar">Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary" id="moneda_create_cancelar">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

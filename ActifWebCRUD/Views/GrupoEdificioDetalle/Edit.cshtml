@@ -1,0 +1,49 @@
+@model ActifWebCRUD.Models.GrupoEdificioDetalle
+
+@{
+    ViewData["Title"] = "Editar Grupo Edificio Detalle";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Editar Grupo Edificio Detalle</h1>
+
+    <form asp-action="Edit" id="grupoedificiodetalle_edit_form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdGE" id="grupoedificiodetalle_edit_id" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="IdGrupo" class="control-label">Grupo</label>
+                    <select asp-for="IdGrupo" class="form-control" asp-items="ViewBag.IdGrupo" id="grupoedificiodetalle_edit_idgrupo">
+                        <option value="">-- Seleccione un Grupo --</option>
+                    </select>
+                    <span asp-validation-for="IdGrupo" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label asp-for="IdEdificio" class="control-label">Edificio</label>
+                    <select asp-for="IdEdificio" class="form-control" asp-items="ViewBag.IdEdificio" id="grupoedificiodetalle_edit_idedificio">
+                        <option value="">-- Seleccione un Edificio --</option>
+                    </select>
+                    <span asp-validation-for="IdEdificio" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary" id="grupoedificiodetalle_edit_submit">
+                <i class="fas fa-save"></i> Guardar Cambios
+            </button>
+            <a asp-action="Index" class="btn btn-secondary" id="grupoedificiodetalle_edit_cancel">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

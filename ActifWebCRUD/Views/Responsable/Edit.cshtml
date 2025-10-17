@@ -1,0 +1,66 @@
+@model ActifWebCRUD.Models.Responsable
+
+@{
+    ViewData["Title"] = "Editar Responsable";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Edit" id="responsable_edit_form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="IdResponsable" />
+                <input type="hidden" asp-for="Rv" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdCompania" class="control-label"></label>
+                    <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="responsable_edit_idcompania">
+                        <option value="">-- Seleccione una Compania --</option>
+                    </select>
+                    <span asp-validation-for="IdCompania" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdCentroCosto" class="control-label"></label>
+                    <select asp-for="IdCentroCosto" class="form-control" asp-items="ViewBag.IdCentroCosto" id="responsable_edit_idcentrocosto">
+                        <option value="">-- Seleccione un Centro de Costo --</option>
+                    </select>
+                    <span asp-validation-for="IdCentroCosto" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" id="responsable_edit_nombre" maxlength="250" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="PuestoResponsable" class="control-label"></label>
+                    <input asp-for="PuestoResponsable" class="form-control" id="responsable_edit_puesto" maxlength="250" />
+                    <span asp-validation-for="PuestoResponsable" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="NumeroEmpleado" class="control-label"></label>
+                    <input asp-for="NumeroEmpleado" class="form-control" id="responsable_edit_numeroempleado" type="number" />
+                    <span asp-validation-for="NumeroEmpleado" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary" id="responsable_edit_guardar">Guardar</button>
+                    <a asp-action="Index" class="btn btn-secondary" id="responsable_edit_cancelar">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

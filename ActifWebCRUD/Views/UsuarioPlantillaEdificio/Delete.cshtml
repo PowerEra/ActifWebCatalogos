@@ -1,0 +1,33 @@
+@model ActifWebCRUD.Models.VUsuarioPlantillaEdificio
+
+@{
+    ViewData["Title"] = "Eliminar Usuario Plantilla Edificio";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Usuario Plantilla Edificio</h1>
+
+    <h3>¿Está seguro de que desea eliminar esta asignación?</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.Idx</dd>
+
+            <dt class="col-sm-3">Usuario</dt>
+            <dd class="col-sm-9">@Model.UserName</dd>
+
+            <dt class="col-sm-3">ID Plantilla</dt>
+            <dd class="col-sm-9">@Model.IdPlantilla</dd>
+
+            <dt class="col-sm-3">Plantilla</dt>
+            <dd class="col-sm-9">@Model.Plantilla</dd>
+        </dl>
+
+        <form asp-action="Delete" id="usuarioplantillaedificio_delete_form">
+            <input type="hidden" asp-for="Idx" />
+            <button type="submit" class="btn btn-danger" id="usuarioplantillaedificio_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="usuarioplantillaedificio_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>

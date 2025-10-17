@@ -1,0 +1,60 @@
+@model ActifWebCRUD.Models.ActifConfigPlaca
+
+@{
+    ViewData["Title"] = "Crear Configuracion de Placa";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Nueva Configuracion de Placa</h1>
+
+    <div class="form-container">
+        <form asp-action="Create" id="actifconfigplaca_create_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdCompania" class="control-label"></label>
+                        <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="actifconfigplaca_create_idcompania">
+                            <option value="">-- Seleccione Compania --</option>
+                        </select>
+                        <span asp-validation-for="IdCompania" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Prefijo" class="control-label"></label>
+                        <input asp-for="Prefijo" class="form-control" id="actifconfigplaca_create_prefijo" maxlength="250" />
+                        <span asp-validation-for="Prefijo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MinDigitos" class="control-label"></label>
+                        <input asp-for="MinDigitos" class="form-control" id="actifconfigplaca_create_mindigitos" type="number" />
+                        <span asp-validation-for="MinDigitos" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MaxDigitos" class="control-label"></label>
+                        <input asp-for="MaxDigitos" class="form-control" id="actifconfigplaca_create_maxdigitos" type="number" />
+                        <span asp-validation-for="MaxDigitos" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary" id="actifconfigplaca_create_submit">Guardar</button>
+                <a asp-action="Index" class="btn btn-secondary" id="actifconfigplaca_create_cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

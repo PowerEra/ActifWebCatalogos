@@ -1,0 +1,67 @@
+@model ActifWebCRUD.Models.PeriodosCerrados
+
+@{
+    ViewData["Title"] = "Crear Periodo Cerrado";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Crear Periodo Cerrado</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" id="periodoscerrados_create_form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Anio" class="control-label"></label>
+                    <input asp-for="Anio" class="form-control" id="periodoscerrados_create_anio" />
+                    <span asp-validation-for="Anio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Mes" class="control-label"></label>
+                    <input asp-for="Mes" class="form-control" id="periodoscerrados_create_mes" />
+                    <span asp-validation-for="Mes" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdCompania" class="control-label"></label>
+                    <select asp-for="IdCompania" class="form-control" asp-items="ViewBag.IdCompania" id="periodoscerrados_create_idcompania">
+                        <option value="">-- Seleccione Compania --</option>
+                    </select>
+                    <span asp-validation-for="IdCompania" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="FechaCierre" class="control-label"></label>
+                    <input asp-for="FechaCierre" class="form-control" type="datetime-local" id="periodoscerrados_create_fechacierre" />
+                    <span asp-validation-for="FechaCierre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdUsuarioCierre" class="control-label"></label>
+                    <input asp-for="IdUsuarioCierre" class="form-control" id="periodoscerrados_create_idusuariocierre" />
+                    <span asp-validation-for="IdUsuarioCierre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="IdTipoDep" class="control-label"></label>
+                    <select asp-for="IdTipoDep" class="form-control" asp-items="ViewBag.IdTipoDep" id="periodoscerrados_create_idtipodep">
+                        <option value="">-- Seleccione Tipo Depreciacion --</option>
+                    </select>
+                    <span asp-validation-for="IdTipoDep" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <input type="submit" value="Guardar" class="btn btn-primary" id="periodoscerrados_create_submit" />
+                    <a asp-action="Index" class="btn btn-secondary" id="periodoscerrados_create_cancel">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

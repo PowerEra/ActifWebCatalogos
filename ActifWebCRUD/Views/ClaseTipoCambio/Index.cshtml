@@ -1,0 +1,89 @@
+@model IEnumerable<ActifWebCRUD.Models.ClaseTipoCambio>
+
+@{
+    ViewData["Title"] = "Clases Tipo de Cambio";
+}
+
+<link rel="stylesheet" href="~/css/actif-crud.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>@ViewData["Title"]</h2>
+        <div>
+            <a asp-action="ExportToExcel" class="btn btn-success me-2" id="clasetipocambio_exportar_excel">
+                <i class="bi bi-file-earmark-excel"></i> Exportar a Excel
+            </a>
+            <a asp-action="Create" class="btn btn-primary" id="clasetipocambio_agregar">
+                <i class="bi bi-file-earmark-plus"></i> Agregar
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" id="clasetipocambio_datatable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdClaseTipCam</td>
+                        <td>@item.Descripcion</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdClaseTipCam" class="btn btn-sm btn-warning" id="clasetipocambio_editar_@item.IdClaseTipCam" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdClaseTipCam" class="btn btn-sm btn-info" id="clasetipocambio_detalles_@item.IdClaseTipCam" title="Detalles">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdClaseTipCam" class="btn btn-sm btn-danger" id="clasetipocambio_eliminar_@item.IdClaseTipCam" title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#clasetipocambio_datatable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+                },
+                "pageLength": 50,
+                "order": [[0, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 2 }
+                ],
+                initComplete: function () {
+                    this.api().columns([0, 1]).every(function () {
+                        var column = this;
+                        var title = $(column.header()).text();
+                        var input = $('<input type="text" class="form-control form-control-sm" placeholder="Filtrar ' + title + '" />')
+                            .appendTo($(column.header()))
+                            .on('click', function (e) {
+                                e.stopPropagation();
+                            })
+                            .on('keyup change clear', function () {
+                                if (column.search() !== this.value) {
+                                    column.search(this.value).draw();
+                                }
+                            });
+                    });
+                }
+            });
+        });
+    </script>
+}

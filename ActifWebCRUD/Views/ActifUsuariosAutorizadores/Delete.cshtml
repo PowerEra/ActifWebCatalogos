@@ -1,0 +1,41 @@
+@model ActifWebCRUD.Models.ActifUsuariosAutorizadores
+
+@{
+    ViewData["Title"] = "Eliminar Usuario Autorizador";
+}
+
+<div class="crud-container">
+    <h1 class="crud-title">Eliminar Usuario Autorizador</h1>
+
+    <h3>¿Está seguro que desea eliminar este registro?</h3>
+    <div class="details-container">
+        <dl class="row">
+            <dt class="col-sm-3">ID Autorizador</dt>
+            <dd class="col-sm-9">@Model.IdUsuarioAutorizador</dd>
+
+            <dt class="col-sm-3">ID Usuario</dt>
+            <dd class="col-sm-9">@Model.IdUsuario</dd>
+
+            <dt class="col-sm-3">Usuario</dt>
+            <dd class="col-sm-9">@Model.UserName</dd>
+
+            <dt class="col-sm-3">ID Compañía</dt>
+            <dd class="col-sm-9">@Model.IdCompania</dd>
+
+            <dt class="col-sm-3">Compañía</dt>
+            <dd class="col-sm-9">@Model.CompaniaName</dd>
+
+            <dt class="col-sm-3">ID Edificio</dt>
+            <dd class="col-sm-9">@Model.IdEdificio</dd>
+
+            <dt class="col-sm-3">Edificio</dt>
+            <dd class="col-sm-9">@Model.EdificioDesc</dd>
+        </dl>
+
+        <form asp-action="Delete" id="actifusuariosautorizadores_delete_form">
+            <input type="hidden" asp-for="IdUsuarioAutorizador" />
+            <button type="submit" class="btn btn-danger" id="actifusuariosautorizadores_delete_confirm">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary" id="actifusuariosautorizadores_delete_cancel">Cancelar</a>
+        </form>
+    </div>
+</div>
