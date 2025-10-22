@@ -1,19 +1,22 @@
+using ActifWebCRUD.Data;
+using ActifWebCRUD.Models;
+using ActifWebCRUD.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ActifWebCRUD.Data;
-using ActifWebCRUD.Models;
 using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class ActifCompaniaTipoDepreciacionController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public ActifCompaniaTipoDepreciacionController(ApplicationDbContext context, IConfiguration configuration)
+        public ActifCompaniaTipoDepreciacionController(CookieAuthenticationService authService, ApplicationDbContext context, IConfiguration configuration)
         {
+            _authService = authService;
             _context = context;
             _configuration = configuration;
         }
@@ -21,9 +24,17 @@ namespace ActifWebCRUD.Controllers
         // GET: ActifCompaniaTipoDepreciacion
         public async Task<IActionResult> Index()
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<ActifCompaniaTipoDepreciacion>());
+            }
+
             var items = await _context.ActifCompaniaTipoDepreciacion
                 .Include(a => a.Compania)
                 .Include(a => a.TipoDepreciacion)
+                .Where(a => a.IdCompania == user.IdCompania)
                 .ToListAsync();
             return View(items);
         }

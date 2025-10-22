@@ -1,0 +1,172 @@
+/* ==================== Actif Theme Variables ==================== */
+/* Este archivo contiene las variables de tema de Actif para ser reutilizadas en toda la aplicación */
+
+:root {
+    /* Logos */
+    --bg-logo-login: url('../../../Imagenes/Actif/Logo.png');
+    --bg-logo: url('../../../Imagenes/Actif/Logo.png');
+
+    /* Colores principales */
+    --bg-color-dark: #263170;
+    --bg-color-light: #99C4D2;
+    --bg-color-middle: #4B95F6;
+    --bg-panel-menu: #FFFFFF;
+    --bg-border: #d3d8dc;
+    --light-color: #FFFFFF;
+    --bg-button: #2E9AFE;
+    --dark-color: #212529;
+    --dark-gray: #2A2A2A;
+    --dark-gray2: #6c757d;
+    --bg-top-bar: #223498;
+
+    /* Colores de círculos/indicadores */
+    --bg-circle-green: #04B404;
+    --bg-circle-blue: #0000FF;
+    --bg-notification: #FF0000;
+
+    /* Paneles y fondos */
+    --bg-panel-primary: #337ab7;
+    --bg-light-gray: #F5F5F5;
+    --bg-gray: #DDDDDD;
+    --bg-light-blue: #a3c6ea;
+
+    /* Prioridades */
+    --bg-high-priority: #FF0000;
+    --bg-middle-priority: #1dafec;
+    --bg-low-priority: #808080;
+    --bg-alert: #FFFF00;
+
+    /* Login */
+    --text-color-login: #263170;
+    --bg-login-body: #FFFFFF;
+    --bg-principal: #FFFFFF;
+    --bg-principal-s: #FFFFFF;
+    --bg-login-btn: #4B95F6;
+    --color-login-text: #2A2A2A;
+
+    /* Display controls */
+    --menu-item-display: none;
+    --display-login-barbottom: none;
+    --display-login-logo: initial;
+    --display-login-bartop: none;
+    --display-login-social: none;
+    --display-navitem: none;
+    --visible-in-this-site: none;
+
+    /* Dimensiones */
+    --padding-btn: 0px;
+    --container-menu-height: 100vh;
+
+    /* Iconos */
+    --edit-circle-icon: url('../../Imagenes/newVersion/edit_32.png');
+
+    /* Colores adicionales para CRUD */
+    --actif-success: #28a745;
+    --actif-success-hover: #218838;
+    --actif-danger: #dc3545;
+    --actif-danger-hover: #c82333;
+    --actif-warning: #ffc107;
+    --actif-info: #17a2b8;
+    --actif-excel-green: #217346;
+    --actif-excel-green-hover: #1a5c37;
+
+    /* Sombras */
+    --actif-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --actif-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --actif-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Border radius */
+    --actif-radius-sm: 4px;
+    --actif-radius-md: 8px;
+    --actif-radius-lg: 12px;
+
+    /* Transiciones */
+    --actif-transition-fast: 0.15s ease-in-out;
+    --actif-transition-normal: 0.3s ease-in-out;
+    --actif-transition-slow: 0.5s ease-in-out;
+}
+
+/* ==================== Clases de utilidad del tema ==================== */
+
+/* Colores de texto */
+.text-actif-dark {
+    color: var(--bg-color-dark) !important;
+}
+
+.text-actif-light {
+    color: var(--bg-color-light) !important;
+}
+
+.text-actif-middle {
+    color: var(--bg-color-middle) !important;
+}
+
+/* Colores de fondo */
+.bg-actif-dark {
+    background-color: var(--bg-color-dark) !important;
+}
+
+.bg-actif-light {
+    background-color: var(--bg-color-light) !important;
+}
+
+.bg-actif-middle {
+    background-color: var(--bg-color-middle) !important;
+}
+
+.bg-actif-light-gray {
+    background-color: var(--bg-light-gray) !important;
+}
+
+/* Botones temáticos */
+.btn-actif-primary {
+    background-color: var(--bg-button);
+    color: var(--light-color);
+    border: none;
+    transition: all var(--actif-transition-fast);
+}
+
+.btn-actif-primary:hover {
+    background-color: var(--bg-color-middle);
+    transform: translateY(-2px);
+    box-shadow: var(--actif-shadow-md);
+}
+
+.btn-actif-dark {
+    background-color: var(--bg-color-dark);
+    color: var(--light-color);
+    border: none;
+    transition: all var(--actif-transition-fast);
+}
+
+.btn-actif-dark:hover {
+    background-color: var(--bg-top-bar);
+    transform: translateY(-2px);
+    box-shadow: var(--actif-shadow-md);
+}
+
+/* Sombras */
+.shadow-actif-sm {
+    box-shadow: var(--actif-shadow-sm);
+}
+
+.shadow-actif-md {
+    box-shadow: var(--actif-shadow-md);
+}
+
+.shadow-actif-lg {
+    box-shadow: var(--actif-shadow-lg);
+}
+
+/* Bordes redondeados */
+.rounded-actif-sm {
+    border-radius: var(--actif-radius-sm);
+}
+
+.rounded-actif-md {
+    border-radius: var(--actif-radius-md);
+}
+
+.rounded-actif-lg {
+    border-radius: var(--actif-radius-lg);
+}

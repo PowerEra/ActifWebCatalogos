@@ -1,19 +1,22 @@
+using ActifWebCRUD.Data;
+using ActifWebCRUD.Models;
+using ActifWebCRUD.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ActifWebCRUD.Data;
-using ActifWebCRUD.Models;
 using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class ActifTipoDepEdificioController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public ActifTipoDepEdificioController(ApplicationDbContext context, IConfiguration configuration)
+        public ActifTipoDepEdificioController(CookieAuthenticationService authService, ApplicationDbContext context, IConfiguration configuration)
         {
+            _authService = authService;
             _context = context;
             _configuration = configuration;
         }
@@ -21,7 +24,23 @@ namespace ActifWebCRUD.Controllers
         // GET: ActifTipoDepEdificio
         public async Task<IActionResult> Index()
         {
-            var actifTipoDepEdificios = await _context.ActifTipoDepEdificio.ToListAsync();
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<ActifTipoDepEdificio>());
+            }
+
+            // Get all edificios that belong to the user's company
+            var edificiosCompania = await _context.Edificio
+                .Where(e => e.IdCompania == user.IdCompania)
+                .Select(e => e.IdEdificio)
+                .ToListAsync();
+
+            // Filter ActifTipoDepEdificio by edificios that belong to the user's company
+            var actifTipoDepEdificios = await _context.ActifTipoDepEdificio
+                .Where(a => a.IdEdificio.HasValue && edificiosCompania.Contains(a.IdEdificio.Value))
+                .ToListAsync();
 
             // Manually load navigation properties
             foreach (var item in actifTipoDepEdificios)
@@ -71,8 +90,15 @@ namespace ActifWebCRUD.Controllers
         // GET: ActifTipoDepEdificio/Create
         public IActionResult Create()
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             ViewData["IdTipoDep"] = new SelectList(_context.TipoDepreciacion.OrderBy(t => t.Descripcion), "IdTipoDep", "Descripcion");
-            ViewData["IdEdificio"] = new SelectList(_context.Edificio.OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion");
+            ViewData["IdEdificio"] = new SelectList(_context.Edificio.Where(e => e.IdCompania == user.IdCompania).OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion");
             return View();
         }
 
@@ -81,6 +107,13 @@ namespace ActifWebCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdTipoDep,IdEdificio,FechaCaptura")] ActifTipoDepEdificio actifTipoDepEdificio)
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (ModelState.IsValid)
             {
                 // Set FechaCaptura to current date/time if not provided
@@ -94,13 +127,20 @@ namespace ActifWebCRUD.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdTipoDep"] = new SelectList(_context.TipoDepreciacion.OrderBy(t => t.Descripcion), "IdTipoDep", "Descripcion", actifTipoDepEdificio.IdTipoDep);
-            ViewData["IdEdificio"] = new SelectList(_context.Edificio.OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion", actifTipoDepEdificio.IdEdificio);
+            ViewData["IdEdificio"] = new SelectList(_context.Edificio.Where(e => e.IdCompania == user.IdCompania).OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion", actifTipoDepEdificio.IdEdificio);
             return View(actifTipoDepEdificio);
         }
 
         // GET: ActifTipoDepEdificio/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -113,7 +153,7 @@ namespace ActifWebCRUD.Controllers
             }
 
             ViewData["IdTipoDep"] = new SelectList(_context.TipoDepreciacion.OrderBy(t => t.Descripcion), "IdTipoDep", "Descripcion", actifTipoDepEdificio.IdTipoDep);
-            ViewData["IdEdificio"] = new SelectList(_context.Edificio.OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion", actifTipoDepEdificio.IdEdificio);
+            ViewData["IdEdificio"] = new SelectList(_context.Edificio.Where(e => e.IdCompania == user.IdCompania).OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion", actifTipoDepEdificio.IdEdificio);
             return View(actifTipoDepEdificio);
         }
 
@@ -122,6 +162,13 @@ namespace ActifWebCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Idx,IdTipoDep,IdEdificio,FechaCaptura")] ActifTipoDepEdificio actifTipoDepEdificio)
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
             if (id != actifTipoDepEdificio.Idx)
             {
                 return NotFound();
@@ -148,7 +195,7 @@ namespace ActifWebCRUD.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdTipoDep"] = new SelectList(_context.TipoDepreciacion.OrderBy(t => t.Descripcion), "IdTipoDep", "Descripcion", actifTipoDepEdificio.IdTipoDep);
-            ViewData["IdEdificio"] = new SelectList(_context.Edificio.OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion", actifTipoDepEdificio.IdEdificio);
+            ViewData["IdEdificio"] = new SelectList(_context.Edificio.Where(e => e.IdCompania == user.IdCompania).OrderBy(e => e.Descripcion), "IdEdificio", "Descripcion", actifTipoDepEdificio.IdEdificio);
             return View(actifTipoDepEdificio);
         }
 

@@ -25,7 +25,7 @@ namespace ActifWebCRUD.Controllers
             var autorizadores = await _context.ActifUsuariosAutorizadores.ToListAsync();
 
             // Load related data using dictionaries
-            var userNames = await _context.Database.SqlQueryRaw<UserInfo>("SELECT IdUser, UserName FROM Users")
+            var userNames = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users")
                 .ToDictionaryAsync(u => u.IdUser, u => u.UserName ?? "");
             var companias = await _context.Compania.ToDictionaryAsync(c => c.IdCompania, c => c.Nombre);
             var edificios = await _context.Edificio.ToDictionaryAsync(e => e.IdEdificio, e => e.Descripcion ?? "");
@@ -59,7 +59,7 @@ namespace ActifWebCRUD.Controllers
             }
 
             // Load related data
-            var userName = await _context.Database.SqlQueryRaw<UserInfo>($"SELECT IdUser, UserName FROM Users WHERE IdUser = {autorizador.IdUsuario}")
+            var userName = await _context.Database.SqlQueryRaw<CompactUser>($"SELECT IdUser, UserName FROM Users WHERE IdUser = {autorizador.IdUsuario}")
                 .FirstOrDefaultAsync();
             var compania = await _context.Compania.FindAsync(autorizador.IdCompania);
             int edificioId = autorizador.IdEdificio;
@@ -75,7 +75,7 @@ namespace ActifWebCRUD.Controllers
         // GET: ActifUsuariosAutorizadores/Create
         public async Task<IActionResult> Create()
         {
-            var users = await _context.Database.SqlQueryRaw<UserInfo>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
+            var users = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
                 .ToListAsync();
             ViewData["IdUsuario"] = new SelectList(users.OrderBy(u => u.UserName), "IdUser", "UserName");
             ViewData["IdCompania"] = new SelectList(_context.Compania.OrderBy(c => c.Nombre), "IdCompania", "Nombre");
@@ -104,7 +104,7 @@ namespace ActifWebCRUD.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var users = await _context.Database.SqlQueryRaw<UserInfo>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
+            var users = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
                 .ToListAsync();
             ViewData["IdUsuario"] = new SelectList(users.OrderBy(u => u.UserName), "IdUser", "UserName", autorizador.IdUsuario);
             ViewData["IdCompania"] = new SelectList(_context.Compania.OrderBy(c => c.Nombre), "IdCompania", "Nombre", autorizador.IdCompania);
@@ -135,7 +135,7 @@ namespace ActifWebCRUD.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Database.SqlQueryRaw<UserInfo>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
+            var users = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
                 .ToListAsync();
             ViewData["IdUsuario"] = new SelectList(users.OrderBy(u => u.UserName), "IdUser", "UserName", autorizador.IdUsuario);
             ViewData["IdCompania"] = new SelectList(_context.Compania.OrderBy(c => c.Nombre), "IdCompania", "Nombre", autorizador.IdCompania);
@@ -183,7 +183,7 @@ namespace ActifWebCRUD.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var users = await _context.Database.SqlQueryRaw<UserInfo>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
+            var users = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users WHERE Inactive IS NULL OR Inactive = 0")
                 .ToListAsync();
             ViewData["IdUsuario"] = new SelectList(users.OrderBy(u => u.UserName), "IdUser", "UserName", autorizador.IdUsuario);
             ViewData["IdCompania"] = new SelectList(_context.Compania.OrderBy(c => c.Nombre), "IdCompania", "Nombre", autorizador.IdCompania);
@@ -217,7 +217,7 @@ namespace ActifWebCRUD.Controllers
             }
 
             // Load related data
-            var userName = await _context.Database.SqlQueryRaw<UserInfo>($"SELECT IdUser, UserName FROM Users WHERE IdUser = {autorizador.IdUsuario}")
+            var userName = await _context.Database.SqlQueryRaw<CompactUser>($"SELECT IdUser, UserName FROM Users WHERE IdUser = {autorizador.IdUsuario}")
                 .FirstOrDefaultAsync();
             var compania = await _context.Compania.FindAsync(autorizador.IdCompania);
             int edificioId = autorizador.IdEdificio;
@@ -251,7 +251,7 @@ namespace ActifWebCRUD.Controllers
             var autorizadores = await _context.ActifUsuariosAutorizadores.ToListAsync();
 
             // Pre-load all related data
-            var userNames = await _context.Database.SqlQueryRaw<UserInfo>("SELECT IdUser, UserName FROM Users")
+            var userNames = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users")
                 .ToDictionaryAsync(u => u.IdUser, u => u.UserName ?? "");
             var companias = await _context.Compania.ToDictionaryAsync(c => c.IdCompania, c => c.Nombre);
             var edificios = await _context.Edificio.ToDictionaryAsync(e => e.IdEdificio, e => e.Descripcion ?? "");
@@ -323,7 +323,7 @@ namespace ActifWebCRUD.Controllers
     }
 
     // Helper class for SQL query results
-    public class UserInfo
+    public class CompactUser
     {
         public int IdUser { get; set; }
         public string? UserName { get; set; }

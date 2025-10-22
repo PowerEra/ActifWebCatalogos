@@ -5,11 +5,14 @@
 }
 
 <div class="crud-container">
-    <h1 class="crud-title">Areas</h1>
+    <h1 class="crud-title">
+        <i class="fas fa-building"></i>
+        Gestión de Áreas
+    </h1>
 
-    <div class="mb-3">
+    <div class="crud-actions-bar">
         <a asp-action="Create" class="btn-add-new" id="area_add_button">
-            <i class="fas fa-plus"></i> Agregar Nueva Area
+            <i class="fas fa-plus-circle"></i> Agregar Nueva Área
         </a>
         <button onclick="exportToExcel()" class="btn-export-excel" id="area_export_button">
             <i class="fas fa-file-excel"></i> Exportar a Excel

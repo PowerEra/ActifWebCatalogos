@@ -3,16 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using ActifWebCRUD.Data;
 using ActifWebCRUD.Models;
 using OfficeOpenXml;
+using ActifWebCRUD.Services;
 
 namespace ActifWebCRUD.Controllers
 {
     public class AreaController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public AreaController(ApplicationDbContext context, IConfiguration configuration)
+        public AreaController(CookieAuthenticationService authService, ApplicationDbContext context, IConfiguration configuration)
         {
+            _authService = authService;
             _context = context;
             _configuration = configuration;
         }
@@ -20,7 +23,16 @@ namespace ActifWebCRUD.Controllers
         // GET: Area
         public async Task<IActionResult> Index()
         {
-            var areas = await _context.Area.ToListAsync();
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<Area>());
+            }
+
+            var areas = await _context.Area
+                .Where(a => a.IdCompania == user.IdCompania || a.IdCompania == null)
+                .ToListAsync();
             return View(areas);
         }
 

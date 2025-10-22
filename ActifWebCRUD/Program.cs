@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using ActifWebCRUD.Data;
 using OfficeOpenXml;
+using ActifWebCRUD.Services;
 
 // Configure EPPlus license for EPPlus 5.x
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Registrar servicios
+builder.Services.AddSingleton<FormsAuthenticationTicketDecryptor>();
+builder.Services.AddScoped<CookieAuthenticationService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

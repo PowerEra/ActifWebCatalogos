@@ -1,19 +1,22 @@
+using ActifWebCRUD.Data;
+using ActifWebCRUD.Models;
+using ActifWebCRUD.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ActifWebCRUD.Data;
-using ActifWebCRUD.Models;
 using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class ActifConfigPlacaController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
 
-        public ActifConfigPlacaController(ApplicationDbContext context, IConfiguration configuration)
+        public ActifConfigPlacaController(CookieAuthenticationService authService, ApplicationDbContext context, IConfiguration configuration)
         {
+            _authService = authService;
             _context = context;
             _configuration = configuration;
         }
@@ -21,7 +24,27 @@ namespace ActifWebCRUD.Controllers
         // GET: ActifConfigPlaca
         public async Task<IActionResult> Index()
         {
-            var actifConfigPlacas = await _context.ActifConfigPlaca.ToListAsync();
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<ActifConfigPlaca>());
+            }
+
+            var actifConfigPlacas = await _context.ActifConfigPlaca
+                .Where(a => a.IdCompania == user.IdCompania)
+                .ToListAsync();
+
+            // Load Compania manually for each item
+            foreach (var item in actifConfigPlacas)
+            {
+                if (item.IdCompania != null)
+                {
+                    var compania = await _context.Compania.FindAsync((short)item.IdCompania.Value);
+                    item.Compania = compania;
+                }
+            }
+
             return View(actifConfigPlacas);
         }
 
