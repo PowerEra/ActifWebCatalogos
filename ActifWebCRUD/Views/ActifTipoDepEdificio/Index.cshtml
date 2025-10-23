@@ -20,18 +20,14 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID Tipo Depreciación</th>
-                <th>Descripción Tipo Depreciación</th>
-                <th>ID Edificio</th>
-                <th>Descripción Edificio</th>
+                <th>Tipo Depreciación</th>
+                <th>Edificio</th>
                 <th>Fecha Captura</th>
                 <th>Acciones</th>
             </tr>
             <tr>
                 <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar ID" /></th>
-                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar ID Tipo" /></th>
                 <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Tipo" /></th>
-                <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar ID Edificio" /></th>
                 <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Edificio" /></th>
                 <th><input type="text" class="form-control form-control-sm" placeholder="Filtrar Fecha" /></th>
                 <th></th>
@@ -42,9 +38,7 @@
             {
                 <tr>
                     <td>@item.Idx</td>
-                    <td>@item.IdTipoDep</td>
-                    <td>@item.TipoDepreciacion?.Descripcion</td>
-                    <td>@item.IdEdificio</td>
+                    <td>@(item.IdTipoDep == 77 ? "Rev. convertido a DLS" : item.TipoDepreciacion?.Descripcion)</td>
                     <td>@item.Edificio?.Descripcion</td>
                     <td>@(item.FechaCaptura?.ToString("yyyy-MM-dd HH:mm:ss"))</td>
                     <td>
@@ -74,12 +68,12 @@
                 },
                 "order": [[0, "asc"]],
                 "columnDefs": [
-                    { "orderable": false, "targets": 6 }
+                    { "orderable": false, "targets": 4 }
                 ],
                 "initComplete": function () {
                     // Apply the search
                     this.api().columns().every(function (index) {
-                        if (index === 6) return; // Skip actions column
+                        if (index === 4) return; // Skip actions column
 
                         var column = this;
                         $('input', this.header()).on('keyup change clear', function () {

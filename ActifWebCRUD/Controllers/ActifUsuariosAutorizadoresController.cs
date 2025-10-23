@@ -1,41 +1,50 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using ActifWebCRUD.Data;
 using ActifWebCRUD.Models;
-using OfficeOpenXml;
+using ActifWebCRUD.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class ActifUsuariosAutorizadoresController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public ActifUsuariosAutorizadoresController(ApplicationDbContext context, IConfiguration configuration)
+        public ActifUsuariosAutorizadoresController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
+            _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: ActifUsuariosAutorizadores
         public async Task<IActionResult> Index()
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<ActifUsuariosAutorizadores>());
+            }
+
             var autorizadores = await _context.ActifUsuariosAutorizadores.ToListAsync();
 
             // Load related data using dictionaries
             var userNames = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users")
                 .ToDictionaryAsync(u => u.IdUser, u => u.UserName ?? "");
             var companias = await _context.Compania.ToDictionaryAsync(c => c.IdCompania, c => c.Nombre);
-            var edificios = await _context.Edificio.ToDictionaryAsync(e => e.IdEdificio, e => e.Descripcion ?? "");
+            var edificiosList = await _context.Edificio.ToListAsync();
+            var edificios = edificiosList.ToDictionary(e => e.IdEdificio, e => e.Descripcion ?? "");
 
             // Manually populate navigation properties
             foreach (var autorizador in autorizadores)
             {
                 autorizador.UserName = userNames.ContainsKey(autorizador.IdUsuario) ? userNames[autorizador.IdUsuario] : "";
                 autorizador.CompaniaName = companias.ContainsKey(autorizador.IdCompania) ? companias[autorizador.IdCompania] : "";
-                int edificioId = autorizador.IdEdificio;
+                short edificioId = (short)autorizador.IdEdificio;
                 autorizador.EdificioDesc = edificios.ContainsKey(edificioId) ? edificios[edificioId] : "";
             }
 
@@ -254,7 +263,8 @@ namespace ActifWebCRUD.Controllers
             var userNames = await _context.Database.SqlQueryRaw<CompactUser>("SELECT IdUser, UserName FROM Users")
                 .ToDictionaryAsync(u => u.IdUser, u => u.UserName ?? "");
             var companias = await _context.Compania.ToDictionaryAsync(c => c.IdCompania, c => c.Nombre);
-            var edificios = await _context.Edificio.ToDictionaryAsync(e => e.IdEdificio, e => e.Descripcion ?? "");
+            var edificiosList = await _context.Edificio.ToListAsync();
+            var edificios = edificiosList.ToDictionary(e => e.IdEdificio, e => e.Descripcion ?? "");
 
             // Set EPPlus license context
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -291,8 +301,8 @@ namespace ActifWebCRUD.Controllers
                     worksheet.Cells[row, 5].Value = companias.ContainsKey(autorizador.IdCompania) ? companias[autorizador.IdCompania] : "";
                     worksheet.Cells[row, 6].Value = autorizador.IdEdificio;
 
-                    // Cast short to int for edificio lookup
-                    int edificioKey = autorizador.IdEdificio;
+                    // Use short for edificio lookup
+                    short edificioKey = (short)autorizador.IdEdificio;
                     worksheet.Cells[row, 7].Value = edificios.ContainsKey(edificioKey) ? edificios[edificioKey] : "";
 
                     row++;

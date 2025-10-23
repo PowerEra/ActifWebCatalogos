@@ -12,13 +12,11 @@ namespace ActifWebCRUD.Controllers
     {
         private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public ActifTipoDepEdificioController(CookieAuthenticationService authService, ApplicationDbContext context, IConfiguration configuration)
+        public ActifTipoDepEdificioController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
             _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: ActifTipoDepEdificio
@@ -31,27 +29,29 @@ namespace ActifWebCRUD.Controllers
                 return View(new List<ActifTipoDepEdificio>());
             }
 
-            // Get all edificios that belong to the user's company
-            var edificiosCompania = await _context.Edificio
-                .Where(e => e.IdCompania == user.IdCompania)
-                .Select(e => e.IdEdificio)
-                .ToListAsync();
+            // Get all ActifTipoDepEdificio records
+            var allRecords = await _context.ActifTipoDepEdificio.ToListAsync();
 
-            // Filter ActifTipoDepEdificio by edificios that belong to the user's company
-            var actifTipoDepEdificios = await _context.ActifTipoDepEdificio
-                .Where(a => a.IdEdificio.HasValue && edificiosCompania.Contains(a.IdEdificio.Value))
-                .ToListAsync();
+            // Filter in memory by edificios that belong to the user's company
+            var actifTipoDepEdificios = new List<ActifTipoDepEdificio>();
 
-            // Manually load navigation properties
-            foreach (var item in actifTipoDepEdificios)
+            foreach (var item in allRecords)
             {
-                if (item.IdTipoDep.HasValue)
-                {
-                    item.TipoDepreciacion = await _context.TipoDepreciacion.FindAsync(item.IdTipoDep.Value);
-                }
                 if (item.IdEdificio.HasValue)
                 {
-                    item.Edificio = await _context.Edificio.FindAsync(item.IdEdificio.Value);
+                    var edificio = await _context.Edificio.FindAsync(item.IdEdificio.Value);
+                    if (edificio != null && edificio.IdCompania == user.IdCompania)
+                    {
+                        // Load navigation properties
+                        item.Edificio = edificio;
+
+                        if (item.IdTipoDep.HasValue)
+                        {
+                            item.TipoDepreciacion = await _context.TipoDepreciacion.FindAsync(item.IdTipoDep.Value);
+                        }
+
+                        actifTipoDepEdificios.Add(item);
+                    }
                 }
             }
 

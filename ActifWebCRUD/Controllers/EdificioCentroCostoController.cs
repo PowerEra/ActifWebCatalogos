@@ -1,31 +1,41 @@
+using ActifWebCRUD.Data;
+using ActifWebCRUD.Models;
+using ActifWebCRUD.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ActifWebCRUD.Data;
-using ActifWebCRUD.Models;
 using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class EdificioCentroCostoController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public EdificioCentroCostoController(ApplicationDbContext context, IConfiguration configuration)
+        public EdificioCentroCostoController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
+            _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: EdificioCentroCosto
         public async Task<IActionResult> Index()
         {
-            var edificioCentroCostos = await _context.EdificioCentroCosto.ToListAsync();
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<EdificioCentroCosto>());
+            }
+
+            var edificioCentroCostos = await _context.EdificioCentroCosto
+                .Where(a => a.IdCompania == user.IdCompania)
+                .ToListAsync();
 
             // Pre-load all related data to avoid individual lookups
             var companias = await _context.Compania.ToDictionaryAsync(c => c.IdCompania);
-            var edificios = await _context.Edificio.ToDictionaryAsync(e => e.IdEdificio);
+            var edificios = await _context.Edificio.ToDictionaryAsync(e => (int)e.IdEdificio);
             var centroCostos = await _context.CentroCosto.ToDictionaryAsync(c => c.IdCentroCosto);
 
             // Manually load navigation properties
@@ -299,7 +309,7 @@ namespace ActifWebCRUD.Controllers
                     worksheet.Cells[row, 2].Value = ecc.IdCompania;
                     worksheet.Cells[row, 3].Value = companias.ContainsKey(ecc.IdCompania) ? companias[ecc.IdCompania] : "";
                     worksheet.Cells[row, 4].Value = ecc.IdEdificio;
-                    worksheet.Cells[row, 5].Value = edificios.ContainsKey(ecc.IdEdificio) ? edificios[ecc.IdEdificio] : "";
+                    worksheet.Cells[row, 5].Value = edificios.ContainsKey((short)ecc.IdEdificio) ? edificios[(short)ecc.IdEdificio] : "";
                     worksheet.Cells[row, 6].Value = ecc.IdCentroCosto;
                     worksheet.Cells[row, 7].Value = centroCostos.ContainsKey(ecc.IdCentroCosto) ? centroCostos[ecc.IdCentroCosto] : "";
                     row++;

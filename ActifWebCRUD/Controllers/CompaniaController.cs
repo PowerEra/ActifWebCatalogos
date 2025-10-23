@@ -1,28 +1,38 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ActifWebCRUD.Data;
 using ActifWebCRUD.Models;
-using System.Data;
+using ActifWebCRUD.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
+using System.Data;
 
 namespace ActifWebCRUD.Controllers
 {
     public class CompaniaController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public CompaniaController(ApplicationDbContext context, IConfiguration configuration)
+        public CompaniaController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
+            _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: Compania
         public async Task<IActionResult> Index()
         {
-            var companias = await _context.Compania.ToListAsync();
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<Compania>());
+            }
+
+            var companias = await _context.Compania
+                .Where(a => a.IdCompania == user.IdCompania)
+                .ToListAsync();
             return View(companias);
         }
 

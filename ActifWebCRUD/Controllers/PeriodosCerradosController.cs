@@ -1,27 +1,36 @@
+using ActifWebCRUD.Data;
+using ActifWebCRUD.Models;
+using ActifWebCRUD.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ActifWebCRUD.Data;
-using ActifWebCRUD.Models;
 using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class PeriodosCerradosController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public PeriodosCerradosController(ApplicationDbContext context, IConfiguration configuration)
+        public PeriodosCerradosController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
+            _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: PeriodosCerrados
         public async Task<IActionResult> Index()
         {
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<PeriodosCerrados>());
+            }
+
             var periodosCerrados = await _context.PeriodosCerrados
+                .Where(a => a.IdCompania == user.IdCompania)
                 .Include(p => p.Compania)
                 .Include(p => p.TipoDepreciacion)
                 .ToListAsync();

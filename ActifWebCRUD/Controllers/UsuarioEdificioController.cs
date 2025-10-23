@@ -69,7 +69,7 @@ namespace ActifWebCRUD.Controllers
 
                             usuarioEdificio.Edificio = new Edificio
                             {
-                                IdEdificio = reader.GetInt32(5),
+                                IdEdificio = reader.GetInt16(5),
                                 Descripcion = reader.IsDBNull(6) ? null : reader.GetString(6)
                             };
 
@@ -302,7 +302,7 @@ namespace ActifWebCRUD.Controllers
 
                             usuarioEdificio.Edificio = new Edificio
                             {
-                                IdEdificio = reader.GetInt32(5),
+                                IdEdificio = reader.GetInt16(5),
                                 Descripcion = reader.IsDBNull(6) ? null : reader.GetString(6)
                             };
 

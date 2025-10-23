@@ -12,13 +12,11 @@ namespace ActifWebCRUD.Controllers
     {
         private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public ActifConfigPlacaController(CookieAuthenticationService authService, ApplicationDbContext context, IConfiguration configuration)
+        public ActifConfigPlacaController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
             _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: ActifConfigPlaca

@@ -1,27 +1,37 @@
+using ActifWebCRUD.Data;
+using ActifWebCRUD.Models;
+using ActifWebCRUD.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ActifWebCRUD.Data;
-using ActifWebCRUD.Models;
 using OfficeOpenXml;
 
 namespace ActifWebCRUD.Controllers
 {
     public class EdificioPisoController : Controller
     {
+        private readonly CookieAuthenticationService _authService;
         private readonly ApplicationDbContext _context;
-        private readonly IConfiguration _configuration;
 
-        public EdificioPisoController(ApplicationDbContext context, IConfiguration configuration)
+        public EdificioPisoController(CookieAuthenticationService authService, ApplicationDbContext context)
         {
+            _authService = authService;
             _context = context;
-            _configuration = configuration;
         }
 
         // GET: EdificioPiso
         public async Task<IActionResult> Index()
         {
-            var edificioPisos = await _context.EdificioPiso.ToListAsync();
+            var user = _authService.GetUserFromCookie(HttpContext);
+
+            if (user == null)
+            {
+                return View(new List<EdificioPiso>());
+            }
+
+            var edificioPisos = await _context.EdificioPiso
+                .Where(a => a.IdCompania == user.IdCompania)
+                .ToListAsync();
 
             // Manually load navigation properties
             foreach (var ep in edificioPisos)
@@ -250,7 +260,7 @@ namespace ActifWebCRUD.Controllers
                     worksheet.Cells[row, 3].Value = edificioPiso.IdEdificio;
                     // Cast to int to lookup in edificios dictionary
                     int edifKey = edificioPiso.IdEdificio;
-                    worksheet.Cells[row, 4].Value = edificios.ContainsKey(edifKey) ? edificios[edifKey] : "";
+                    worksheet.Cells[row, 4].Value = edificios.ContainsKey((short)edifKey) ? edificios[(short)edifKey] : "";
                     worksheet.Cells[row, 5].Value = edificioPiso.IdPiso;
                     worksheet.Cells[row, 6].Value = pisos.ContainsKey(edificioPiso.IdPiso) ? pisos[edificioPiso.IdPiso] : "";
                     row++;
@@ -273,7 +283,7 @@ namespace ActifWebCRUD.Controllers
             }
         }
 
-        private bool EdificioPisoExists(short idCompania, short idEdificio, short idPiso)
+        private bool EdificioPisoExists(short idCompania, int idEdificio, short idPiso)
         {
             return _context.EdificioPiso.Any(e => e.IdCompania == idCompania && e.IdEdificio == idEdificio && e.IdPiso == idPiso);
         }
